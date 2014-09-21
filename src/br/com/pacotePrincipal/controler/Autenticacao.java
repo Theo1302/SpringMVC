@@ -42,6 +42,7 @@ public class Autenticacao implements UserDetailsService {
 		}
 		UserDetails user =
 				new org.springframework.security.core.userdetails.User(email, usuario.getSenha(), true, true, true, true, listGranted);
+
 		return user;
 	}
 
