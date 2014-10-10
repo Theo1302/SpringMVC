@@ -7,6 +7,6 @@ public class AliasPaginas {
 	public final static String HOME_ALUNO = "/aluno/home";
 
 	public final static String HOME_PROFESSOR = "/professor/home";
-
+	
 
 }

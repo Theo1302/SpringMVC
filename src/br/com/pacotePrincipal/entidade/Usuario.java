@@ -2,7 +2,9 @@ package br.com.pacotePrincipal.entidade;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
 
+@Entity
 public class Usuario implements Serializable {
 
 	/**
@@ -10,6 +12,8 @@ public class Usuario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	private long id;
 	private String email;
 	private String senha;
 	private String nome;

@@ -7,17 +7,17 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <style>
-.recuo{
+.recuo {
 	padding-right: 25px;
 }
 </style>
 <sec:authorize access="isAuthenticated()">
 
 	<div class="container">
-		
+
 		<nav class="navbar navbar-default " role="navigation">
 			<div class="container">
-				
+
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -31,18 +31,23 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="#">Link 1</a></li>
-						<li><a href="#">Link 2</a></li>
-						<li><a href="#">Link 1</a></li>
+						<li><a href="#">Usuario</a></li>
+						<li><a href="#">Semestre</a></li>
+						<li><a href="#">Curso</a></li>
+						<li><a href="#">Disciplina</a></li>
+						<li><a href="#">Configurações</a></li>
+						<li><a href="#">Disciplina</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
 						<li><p class="navbar-text">
-								<span class="glyphicon glyphicon-user"></span>
-								${nomeUsuario}
+								<span class="glyphicon glyphicon-user"></span> ${nomeUsuario}
 							</p></li>
-						<li class="recuo"><p class="navbar-text"><a href="<c:url value="/j_spring_security_logout"/>"
-							class="navbar-link"><span class="glyphicon glyphicon-log-out"></span>Sair</a></p></li>
+						<li class="recuo"><p class="navbar-text">
+								<a href="<c:url value="/j_spring_security_logout"/>"
+									class="navbar-link"><span
+									class="glyphicon glyphicon-log-out"></span>Sair</a>
+							</p></li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

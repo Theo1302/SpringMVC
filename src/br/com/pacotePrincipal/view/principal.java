@@ -15,7 +15,6 @@ public class principal {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
-		System.out.println("Teste");
 		return "index";
 	}
 
