@@ -43,7 +43,5 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	 <!-- Spring Data -->
-    <jpa:repositories base-package="br.com.pacotePrincipal.dao"
-                      entity-manager-factory-ref="entityManagerFactory"
-                      transaction-manager-ref="transactionManager"/>
+    <jpa:repositories base-package="br.com.pacotePrincipal.dao"/>
 </beans>

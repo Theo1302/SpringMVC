@@ -12,6 +12,6 @@ public class UsuarioController {
 	private IUsuarioDao iusuarioDao;
 	
 	public void	usuario(int id) {
-		System.out.println(iusuarioDao.findByEmail("").getNome());
+		System.out.println(iusuarioDao.findByEmail("tel").getNome());
 	}
 }
