@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import br.com.pacotePrincipal.entidade.Role;
 import br.com.pacotePrincipal.entidade.Usuario;
 
 @Repository
@@ -25,7 +26,7 @@ public class UsuarioDao {
 				Usuario usuario = new Usuario();
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNome(rs.getString("nome"));
-				usuario.setRole(rs.getString("role"));
+				usuario.setRole(Role.ROLE_ADMIN/*rs.getString("role")*/);
 				usuario.setSenha(rs.getString("senha"));
 				return usuario;
 			}

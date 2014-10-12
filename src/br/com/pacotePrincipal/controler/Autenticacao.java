@@ -16,7 +16,7 @@ import br.com.pacotePrincipal.entidade.Usuario;
 
 
 /**
- * Classe Responsavel pela autenticação do Usuario
+ * Classe Responsavel pela autenticaï¿½ï¿½o do Usuario
  * 
  * @author Adriano 17/09/2014
  */
@@ -34,9 +34,9 @@ public class Autenticacao implements UserDetailsService {
 
 		List<GrantedAuthority> listGranted = new ArrayList<GrantedAuthority>();
 
-		if ((usuario != null) && (usuario.getRole() != null) && (usuario.getRole() != "")) {
+		if ((usuario != null) && (usuario.getRole() != null) && (usuario.getRole().toString() != "")) {
 
-			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(usuario.getRole());
+			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(usuario.getRole().toString());
 
 			listGranted.add(simpleGrantedAuthority);
 		}

@@ -1,5 +1,6 @@
 package br.com.pacotePrincipal.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,13 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.pacotePrincipal.controler.UsuarioController;
 import br.com.pacotePrincipal.util.AliasPaginas;
 
 @Controller
 public class principal {
+	
+	@Autowired
+	private UsuarioController usuarioControler;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
+		System.out.println("HOME");
+		usuarioControler.usuario(0);
 		return "index";
 	}
 
