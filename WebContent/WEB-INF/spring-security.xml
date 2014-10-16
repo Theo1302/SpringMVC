@@ -11,8 +11,8 @@
 		access-denied-page="/login?error=403">
 
 
-		<security:intercept-url pattern="/pages/admin/**" access="permitAll"
-			 />
+		<security:intercept-url pattern="/pages/admin/**" 
+			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/pages/aluno/**"
 			access="hasRole('ROLE_ALUNO')" />
 		<security:intercept-url pattern="/pages/professor/**"

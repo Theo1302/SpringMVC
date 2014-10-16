@@ -12,7 +12,7 @@ import br.com.pacotePrincipal.entidade.Role;
 import br.com.pacotePrincipal.entidade.Usuario;
 
 @Repository
-public class UsuarioDao {
+public class AutenticacaoDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

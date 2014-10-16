@@ -31,7 +31,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="#">Usuario</a></li>
+						<li><a href="formUsuario">Usuario</a></li>
 						<li><a href="#">Semestre</a></li>
 						<li><a href="#">Curso</a></li>
 						<li><a href="#">Disciplina</a></li>

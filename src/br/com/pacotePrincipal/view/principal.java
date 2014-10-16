@@ -9,19 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.pacotePrincipal.controler.UsuarioController;
+import br.com.pacotePrincipal.controler.IUsuarioControler;
+import br.com.pacotePrincipal.controler.impl.UsuarioControllerImpl;
 import br.com.pacotePrincipal.util.AliasPaginas;
 
 @Controller
 public class principal {
 	
 	@Autowired
-	private UsuarioController usuarioControler;
+	private IUsuarioControler usuarioControler;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
-		System.out.println("HOME");
-		usuarioControler.usuario(0);
 		return "index";
 	}
 
@@ -29,7 +28,6 @@ public class principal {
 	public ModelAndView home() {
 		ModelAndView model = new ModelAndView();
 		Authentication authe = SecurityContextHolder.getContext().getAuthentication();
-
 		for (GrantedAuthority grant : authe.getAuthorities()) {
 			if (grant.getAuthority().equals("ROLE_ADMIN")) {
 				model.setViewName(AliasPaginas.HOME_ADMIN);
@@ -41,7 +39,6 @@ public class principal {
 		}
 		System.out.println(authe.getName());
 		model.addObject("nomeUsuario", authe.getName());
-
 		return model;
 	}
 

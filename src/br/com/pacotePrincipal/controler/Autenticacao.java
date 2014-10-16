@@ -11,12 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.pacotePrincipal.dao.UsuarioDao;
+import br.com.pacotePrincipal.dao.AutenticacaoDao;
 import br.com.pacotePrincipal.entidade.Usuario;
 
 
 /**
- * Classe Responsavel pela autentica��o do Usuario
+ * Classe Responsavel pela autenticação Usuario
  * 
  * @author Adriano 17/09/2014
  */
@@ -24,13 +24,13 @@ import br.com.pacotePrincipal.entidade.Usuario;
 public class Autenticacao implements UserDetailsService {
 
 	@Autowired
-	private UsuarioDao usuarioDao;
+	private IUsuarioControler usuarioControler;
 
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-		Usuario usuario = this.usuarioDao.getbyEmail(email);
+		Usuario usuario = this.usuarioControler.findbyEmail(email);
 
 		List<GrantedAuthority> listGranted = new ArrayList<GrantedAuthority>();
 

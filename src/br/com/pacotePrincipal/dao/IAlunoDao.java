@@ -2,40 +2,41 @@ package br.com.pacotePrincipal.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
+import br.com.pacotePrincipal.entidade.Aluno;
 import br.com.pacotePrincipal.entidade.Role;
-import br.com.pacotePrincipal.entidade.Usuario;
 
-public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
-	
+public interface IAlunoDao extends CrudRepository<Aluno, Long>{
 	/**
 	 * Pesquisa pelo email
+	 * 
 	 * @param email
 	 * @return Usuario
 	 */
-	Usuario findByEmail(String email);
-	
+	Aluno findByEmail(String email);
+
 	/**
-	 *Pesquisa pelo id 
+	 * Pesquisa pelo id
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Usuario findById(int id);
-	
+	Aluno findById(int id);
+
 	/**
-	 * Pesquisa pela tarefa
+	 * Pesquisa pela role
+	 * 
 	 * @param role
 	 * @return
 	 */
-	Usuario findByRole(Role role);
-	
-	
-	//Metodos Spring
-	
-	
+	Aluno findByRole(Role role);
+
+	// Metodos Spring
+
 	@Override
 	public void delete(Long arg0);
 	
 	@Override
-	public <S extends Usuario> S save(S arg0);
+	public <S extends Aluno> S save(S arg0);
 
+	
 }

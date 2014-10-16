@@ -15,9 +15,9 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="usuario")
-@SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq")
-public class Usuario implements Serializable {
+@Table(name="administrador")
+@SequenceGenerator(name = "administrador_seq", sequenceName = "administrador_seq")
+public class Administrador implements Serializable {
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@Column(name = "id", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "administrador_seq")
 	private long id;
 	
 
@@ -83,6 +83,4 @@ public class Usuario implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
 }
