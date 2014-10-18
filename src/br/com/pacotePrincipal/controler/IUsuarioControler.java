@@ -30,7 +30,7 @@ public interface IUsuarioControler {
 	 * @param email
 	 * @return Usuario
 	 */
-	Usuario findbyEmail(String email);
+	Object findbyEmail(String email);
 	
 	/**
 	 *Pesquisa pelo id 

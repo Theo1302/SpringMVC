@@ -12,8 +12,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.pacotePrincipal.dao.AutenticacaoDao;
+import br.com.pacotePrincipal.entidade.Administrador;
+import br.com.pacotePrincipal.entidade.Aluno;
+import br.com.pacotePrincipal.entidade.Professor;
 import br.com.pacotePrincipal.entidade.Usuario;
-
 
 /**
  * Classe Responsavel pela autenticação Usuario
@@ -26,24 +28,44 @@ public class Autenticacao implements UserDetailsService {
 	@Autowired
 	private IUsuarioControler usuarioControler;
 
-
+	/**
+	 * Metodo Responsavel por dar as autoridades nesessarias e retornar ao
+	 * container do Spring
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Object objUsuario = this.usuarioControler.findbyEmail(email);
+		UserDetails user;
+		List<GrantedAuthority> listGranted;
+		SimpleGrantedAuthority simpleGrantedAuthority;
 
-		Usuario usuario = this.usuarioControler.findbyEmail(email);
-
-		List<GrantedAuthority> listGranted = new ArrayList<GrantedAuthority>();
-
-		if ((usuario != null) && (usuario.getRole() != null) && (usuario.getRole().toString() != "")) {
-
-			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(usuario.getRole().toString());
-
+		if (objUsuario instanceof Aluno) {
+			Aluno aluno = (Aluno) objUsuario;
+			listGranted = new ArrayList<GrantedAuthority>();
+			simpleGrantedAuthority = new SimpleGrantedAuthority(aluno.getRole().toString());
 			listGranted.add(simpleGrantedAuthority);
-		}
-		UserDetails user =
-				new org.springframework.security.core.userdetails.User(email, usuario.getSenha(), true, true, true, true, listGranted);
+			user = new org.springframework.security.core.userdetails.User(email, aluno.getSenha(), true, true, true, true,
+					listGranted);
+			return user;
+		} else if (objUsuario instanceof Professor) {
+			Professor professor = (Professor) objUsuario;
+			listGranted = new ArrayList<GrantedAuthority>();
+			simpleGrantedAuthority = new SimpleGrantedAuthority(professor.getRole().toString());
+			listGranted.add(simpleGrantedAuthority);
+			user = new org.springframework.security.core.userdetails.User(email, professor.getSenha(), true, true, true, true,
+					listGranted);
+			return user;
+		} else {
+			Administrador admin = (Administrador) objUsuario;
+			listGranted = new ArrayList<GrantedAuthority>();
+			simpleGrantedAuthority = new SimpleGrantedAuthority(admin.getRole().toString());
+			listGranted.add(simpleGrantedAuthority);
+			user = new org.springframework.security.core.userdetails.User(email, admin.getSenha(), true, true, true, true,
+					listGranted);
 
-		return user;
+			return user;
+		}
+
 	}
 
 }

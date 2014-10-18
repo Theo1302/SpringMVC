@@ -31,13 +31,12 @@ public class principal {
 		for (GrantedAuthority grant : authe.getAuthorities()) {
 			if (grant.getAuthority().equals("ROLE_ADMIN")) {
 				model.setViewName(AliasPaginas.HOME_ADMIN);
-			} else if (grant.getAuthority().equals("")) {
+			} else if (grant.getAuthority().equals("ROLE_ALUNO")) {
 				model.setViewName(AliasPaginas.HOME_ALUNO);
-			} else if (grant.getAuthority().equals("")) {
+			} else if (grant.getAuthority().equals("ROLE_PROFESSOR")) {
 				model.setViewName(AliasPaginas.HOME_PROFESSOR);
 			}
 		}
-		System.out.println(authe.getName());
 		model.addObject("nomeUsuario", authe.getName());
 		return model;
 	}

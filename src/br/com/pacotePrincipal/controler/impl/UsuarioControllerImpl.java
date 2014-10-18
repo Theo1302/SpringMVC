@@ -6,19 +6,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pacotePrincipal.controler.IUsuarioControler;
+import br.com.pacotePrincipal.dao.IAdministradorDao;
+import br.com.pacotePrincipal.dao.IAlunoDao;
 import br.com.pacotePrincipal.dao.IUsuarioDao;
 import br.com.pacotePrincipal.entidade.Role;
 import br.com.pacotePrincipal.entidade.Usuario;
 
 @Service
 public class UsuarioControllerImpl implements IUsuarioControler {
-	
+
 	@Autowired
 	private IUsuarioDao usuarioDao;
-	
+
+	private IAdministradorDao administradorDao;
+
+	private IAlunoDao alunoDao;
+
+	public UsuarioControllerImpl() {
+	}
 
 	@Override
 	public void inserir(Usuario usuario) {
+		if (usuario.getRole().equals("ROLE_ADMIN")) {
+			
+			
+			
+			
+			
+		} else if (usuario.getRole().equals("ROLE_PROFESSOR")) {
+
+		} else {
+
+		}
+
 		usuarioDao.save(usuario);
 	}
 
