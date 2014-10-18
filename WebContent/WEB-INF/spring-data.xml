@@ -33,6 +33,7 @@
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence"/>
+        <property name="packagesToScan" value="br.com.pacotePrincipal.*" />
         <property name="dataSource" ref="dataSource"/>
          <property name="persistenceUnitName" value="ShoolDrivePU"/>
         <property name="persistenceXmlLocation" value="/META-INF/persistence.xml" />

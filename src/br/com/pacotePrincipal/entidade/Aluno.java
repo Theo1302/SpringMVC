@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="aluno")
-@SequenceGenerator(name = "aluno_seq", sequenceName = "aluno_seq")
+@SequenceGenerator(name = "aluno_seq", sequenceName = "aluno_seq",allocationSize=1,initialValue=1)
 public class Aluno implements Serializable {
 
 	/**

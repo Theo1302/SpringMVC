@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="professor")
-@SequenceGenerator(name = "professor_seq", sequenceName = "professor_seq")
+@SequenceGenerator(name = "professor_seq", sequenceName = "professor_seq",allocationSize=1,initialValue=1)
 public class Professor implements Serializable {
 
 	/**
@@ -26,7 +26,7 @@ public class Professor implements Serializable {
 
 	@Id
 	@Column(name = "id", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "professor_seq")
 	private long id;
 	
 

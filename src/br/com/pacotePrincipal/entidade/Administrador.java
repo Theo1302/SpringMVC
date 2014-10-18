@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="administrador")
-@SequenceGenerator(name = "administrador_seq", sequenceName = "administrador_seq")
+@SequenceGenerator(name = "administrador_seq", sequenceName = "administrador_seq",allocationSize=1,initialValue=1)
 public class Administrador implements Serializable {
 
 	/**
