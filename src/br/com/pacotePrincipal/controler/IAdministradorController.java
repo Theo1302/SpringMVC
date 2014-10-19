@@ -1,10 +1,12 @@
 package br.com.pacotePrincipal.controler;
 
+import java.util.List;
+
 import br.com.pacotePrincipal.entidade.Administrador;
 import br.com.pacotePrincipal.entidade.Role;
 
 /***
- * Interface DAO ADMINISTRADOR
+ * Interface ADMINISTRADOR Controler
  * @author Adriano
  *
  */
@@ -33,6 +35,12 @@ public interface IAdministradorController {
 	 * @return
 	 */
 	Administrador findByRole(Role role);
+	
+	/**
+	 * Pesquisa Todos os Usuario
+	 * @return
+	 */
+	List<Administrador> findAll();
 
 	// Metodos Spring
 

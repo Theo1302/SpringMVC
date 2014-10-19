@@ -12,11 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="administrador")
-@SequenceGenerator(name = "administrador_seq", sequenceName = "administrador_seq",allocationSize=1,initialValue=1)
+@Table(name = "administrador")
+@SequenceGenerator(name = "administrador_seq", sequenceName = "administrador_seq", allocationSize = 1, initialValue = 1)
 public class Administrador implements Serializable {
 
 	/**
@@ -28,18 +26,33 @@ public class Administrador implements Serializable {
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "administrador_seq")
 	private long id;
+
+	public Administrador() {
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+
+	public Administrador(long id, String email, String senha, String nome, Role role) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.role = role;
+	}
+
 
 
 	@Column(name = "email", length = 150, nullable = false)
 	private String email;
-	
+
 	@Column(name = "senha", length = 100, nullable = false)
 	private String senha;
-	
+
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "user_role")
 	private Role role;
@@ -75,7 +88,7 @@ public class Administrador implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public long getId() {
 		return id;
 	}

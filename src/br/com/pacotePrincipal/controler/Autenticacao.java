@@ -11,11 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.pacotePrincipal.dao.AutenticacaoDao;
 import br.com.pacotePrincipal.entidade.Administrador;
 import br.com.pacotePrincipal.entidade.Aluno;
 import br.com.pacotePrincipal.entidade.Professor;
-import br.com.pacotePrincipal.entidade.Usuario;
 
 /**
  * Classe Responsavel pela autenticação Usuario
@@ -34,7 +32,7 @@ public class Autenticacao implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Object objUsuario = this.usuarioControler.findbyEmail(email);
+		Object objUsuario = this.usuarioControler.procurarEmail(email);
 		UserDetails user;
 		List<GrantedAuthority> listGranted;
 		SimpleGrantedAuthority simpleGrantedAuthority;
@@ -55,7 +53,7 @@ public class Autenticacao implements UserDetailsService {
 			user = new org.springframework.security.core.userdetails.User(email, professor.getSenha(), true, true, true, true,
 					listGranted);
 			return user;
-		} else {
+		} else  {
 			Administrador admin = (Administrador) objUsuario;
 			listGranted = new ArrayList<GrantedAuthority>();
 			simpleGrantedAuthority = new SimpleGrantedAuthority(admin.getRole().toString());

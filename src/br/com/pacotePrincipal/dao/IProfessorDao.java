@@ -32,9 +32,10 @@ public interface IProfessorDao extends CrudRepository<Professor, Long> {
 
 	// Metodos Spring
 
+
 	@Override
 	public void delete(Long arg0);
-	
+
 	@Override
 	public <S extends Professor> S save(S arg0);
 }

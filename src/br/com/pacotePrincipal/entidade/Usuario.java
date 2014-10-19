@@ -29,7 +29,17 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
 	private long id;
 	
+	public Usuario() {
+	}
 
+	public Usuario(long id, String email, String senha, String nome, Role role) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.role = role;
+	}
 
 	@Column(name = "email", length = 150, nullable = false)
 	private String email;

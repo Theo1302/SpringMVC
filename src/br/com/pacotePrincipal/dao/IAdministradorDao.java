@@ -37,7 +37,8 @@ public interface IAdministradorDao extends CrudRepository<Administrador, Long> {
 	Administrador findByRole(Role role);
 
 	// Metodos Spring
-
+	
+	
 	@Override
 	public void delete(Long arg0);
 

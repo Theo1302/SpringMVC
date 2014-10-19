@@ -16,9 +16,8 @@
 		<security:intercept-url pattern="/pages/aluno/**"
 			access="hasRole('ROLE_ALUNO')" />
 		<security:intercept-url pattern="/pages/professor/**"
-			access="hasRole('ROLE_PROF')" />
-		<security:intercept-url pattern="/**" access="permitAll" />
-		<security:form-login login-page='/pages/index.jsp'
+			access="hasRole('ROLE_PROFESSOR')" />
+		<security:form-login login-page='/'
 			default-target-url="/home" authentication-failure-url="/login.html" />
 
 		<security:logout invalidate-session="true"
@@ -29,7 +28,4 @@
 		<security:authentication-provider
 			user-service-ref='autenticacao' />
 	</security:authentication-manager>
-	
-	<!-- <security:intercept-url pattern="/pages/admin/**" 
-			access="hasRole('ROLE_ADMIN')" /> -->
 </beans>

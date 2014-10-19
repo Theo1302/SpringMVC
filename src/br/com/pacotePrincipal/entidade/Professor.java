@@ -12,11 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="professor")
-@SequenceGenerator(name = "professor_seq", sequenceName = "professor_seq",allocationSize=1,initialValue=1)
+@Table(name = "professor")
+@SequenceGenerator(name = "professor_seq", sequenceName = "professor_seq", allocationSize = 1, initialValue = 1)
 public class Professor implements Serializable {
 
 	/**
@@ -28,18 +26,29 @@ public class Professor implements Serializable {
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "professor_seq")
 	private long id;
-	
 
+	public Professor() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Professor(long id, String email, String senha, String nome, Role role) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.role = role;
+	}
 
 	@Column(name = "email", length = 150, nullable = false)
 	private String email;
-	
+
 	@Column(name = "senha", length = 100, nullable = false)
 	private String senha;
-	
+
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "user_role")
 	private Role role;
@@ -75,7 +84,7 @@ public class Professor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -83,6 +92,5 @@ public class Professor implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 }

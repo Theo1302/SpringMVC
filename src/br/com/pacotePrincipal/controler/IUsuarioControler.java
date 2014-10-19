@@ -2,6 +2,9 @@ package br.com.pacotePrincipal.controler;
 
 import java.util.List;
 
+import br.com.pacotePrincipal.entidade.Administrador;
+import br.com.pacotePrincipal.entidade.Aluno;
+import br.com.pacotePrincipal.entidade.Professor;
 import br.com.pacotePrincipal.entidade.Role;
 import br.com.pacotePrincipal.entidade.Usuario;
 
@@ -13,10 +16,14 @@ import br.com.pacotePrincipal.entidade.Usuario;
 public interface IUsuarioControler {
 	
 	/**
-	 * Insere Um usuario
-	 * @param Usuario
+	 * Insere Um {@link Administrador} 	<b>OU</b><p>
+	 * insere Um {@link Professor}<b>OU</b><p>
+	 * insere Um {@link Aluno} <b>OU</b><p>
+	 * @param administrador
+	 * @param aluno
+	 * @param professor
 	 */
-	void inserir(Usuario usuario);
+	void inserir(Administrador administrador, Aluno aluno, Professor professor);
 	
 	/**
 	 * Delete o Usuario Pelo id
@@ -31,6 +38,16 @@ public interface IUsuarioControler {
 	 * @return Usuario
 	 */
 	Object findbyEmail(String email);
+	
+	
+	/***
+	 * Metodo responsavel por procurar o usuario para autenticação
+	 * @param email
+	 * @return
+	 */
+	Object procurarEmail(String email);
+	
+	
 	
 	/**
 	 *Pesquisa pelo id 

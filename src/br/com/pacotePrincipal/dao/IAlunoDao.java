@@ -31,7 +31,7 @@ public interface IAlunoDao extends CrudRepository<Aluno, Long>{
 	Aluno findByRole(Role role);
 
 	// Metodos Spring
-
+		
 	@Override
 	public void delete(Long arg0);
 	

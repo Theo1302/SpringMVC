@@ -1,9 +1,12 @@
 package br.com.pacotePrincipal.controler;
 
+import java.util.List;
+
 import br.com.pacotePrincipal.entidade.Professor;
 import br.com.pacotePrincipal.entidade.Role;
+import br.com.pacotePrincipal.entidade.Usuario;
 
-public interface IProfessorDao{
+public interface IProfessorController{
 	/**
 	 * Pesquisa pelo email
 	 * 
@@ -28,6 +31,12 @@ public interface IProfessorDao{
 	 */
 	Professor findByRole(Role role);
 
+	
+	/**
+	 * Pesquisa Todos os Usuario
+	 * @return
+	 */
+	List<Professor> findAll();
 	// Metodos Spring
 
 	
