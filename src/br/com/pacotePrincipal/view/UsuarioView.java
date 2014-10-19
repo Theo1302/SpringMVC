@@ -3,6 +3,8 @@ package br.com.pacotePrincipal.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
@@ -33,16 +35,16 @@ public class UsuarioView {
 	private final String CADASTRO_USUARIO = "admin/usuario/cadastroUsuario";
 	private final String LISTA_USUARIO = "admin/usuario/listaUsuario";
 
-	@Autowired(required=true)
+	@Autowired
 	private IUsuarioControler usuarioControler;
 	
-	@Autowired(required=true)
+	@Autowired
 	private IAdministradorController administradorController;
 	
-	@Autowired(required=true)
+	@Autowired
 	private IProfessorController professorController;
 	
-	@Autowired(required=true)
+	@Autowired
 	private IAlunoController alunoController;
 	
 	
@@ -56,7 +58,9 @@ public class UsuarioView {
 	@RequestMapping("/addUsuario")
 	public ModelAndView addUsuario(@ModelAttribute("usuario") Usuario usuario, BindingResult result) {
 		ModelAndView model = new ModelAndView(CADASTRO_USUARIO);
-
+		for (Administrador a : administradorController.findAll()) {
+			System.out.println(a.getNome());
+		}
 		try {
 		/**
 		 *	Dependendo da Role Atribuida insere a entidade
@@ -83,26 +87,21 @@ public class UsuarioView {
 	}
 
 	@RequestMapping("/listaUsuario")
-	private ModelAndView listaUsuario() {
+	public ModelAndView listaUsuario(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(LISTA_USUARIO);
 		Usuario usuario;
 		try {
-			List<Usuario> listUsuario = new ArrayList<>(); 
-			List<Professor> listProfessor = professorController.findAll();
-			List<Administrador> listAdministrador = administradorController.findAll() ;
-			List<Aluno> listAluno = alunoController.findAll();
+			List<Usuario> listUsuario = new ArrayList<>();
 			
-			
-			
-			for (Aluno aluno : listAluno) {
+			for (Aluno aluno : alunoController.findAll()) {
 				usuario = new Usuario(aluno.getId(), aluno.getEmail(), aluno.getSenha(), aluno.getNome(), aluno.getRole());
 				listUsuario.add(usuario);
 			}
-			for (Professor professor : listProfessor) {
+			for (Professor professor : professorController.findAll()) {
 				usuario = new Usuario(professor.getId(), professor.getEmail(), professor.getSenha(), professor.getNome(), professor.getRole());
 				listUsuario.add(usuario);
 			}
-			for (Administrador administrador : listAdministrador) {
+			for (Administrador administrador : administradorController.findAll()) {
 				usuario = new Usuario(administrador.getId(), administrador.getEmail(), administrador.getSenha(), administrador.getNome(), administrador.getRole());
 				listUsuario.add(usuario);
 			}
@@ -114,15 +113,14 @@ public class UsuarioView {
 	}
 
 	@RequestMapping("/excluirUsuario")
-	private ModelAndView excluirUsuario(@RequestParam("id") Long id, @RequestParam("role") Role role) {
-		ModelAndView model = new ModelAndView();
+	public ModelAndView excluirUsuario(@RequestParam("id") Long id, @RequestParam("role") String role) {
+		ModelAndView model = new ModelAndView(LISTA_USUARIO);
 		try {
-			
-			if (role.name().equals("ROLE_ADMIN")) {
+			if (role.equals("ROLE_ADMIN")) {
 				administradorController.delete(id);
-			} else if (role.name().equals("ROLE_ALUNO")) {
+			} else if (role.equals("ROLE_ALUNO")) {
 				alunoController.delete(id);
-			} else if (role.name().equals("ROLE_PROFESSOR")) {
+			} else if (role.equals("ROLE_PROFESSOR")) {
 				professorController.delete(id);
 			}
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
@@ -130,8 +128,8 @@ public class UsuarioView {
 		} catch (Exception e) {
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.ERRO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), Mensagems.ErroOperacaoUsuario.getMensagem());
+			e.printStackTrace();
 		}
-		model = this.listaUsuario();
 		return model;
 
 	}

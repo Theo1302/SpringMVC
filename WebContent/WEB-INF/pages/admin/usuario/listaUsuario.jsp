@@ -70,7 +70,7 @@
 									<td>${usuario.nome}</td>
 									<td>${usuario.email}<br></td>
 									<td>${usuario.role}</td>
-									<td align="center"><a type="button" href="excluirUsuario?id=${usuario.id}-role=${usuario.role}"
+									<td align="center"><a type="button" href="excluirUsuario?id=${usuario.id}&role=${usuario.role}"
 											class="btn btn-danger">
 											<span class="glyphicon glyphicon-remove-sign"></span> Excluir
 										</a></td>

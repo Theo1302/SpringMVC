@@ -43,11 +43,7 @@ public class ProfessorControler implements IProfessorController {
 	}
 
 	@Override
-	public List<Professor> findAll() {
-		for (Professor i : professorDao.findAll()) {
-			System.out.println(i.getNome());
-		}
-		
+	public List<Professor> findAll() {		
 		return (List<Professor>) professorDao.findAll();
 	}
 
