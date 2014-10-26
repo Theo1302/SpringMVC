@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,10 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.pacotePrincipal.controler.ICursoController;
-import br.com.pacotePrincipal.controler.IDisciplinaController;
 import br.com.pacotePrincipal.convert.ConvertCurso;
 import br.com.pacotePrincipal.entidade.Curso;
-import br.com.pacotePrincipal.entidade.Disciplina;
 import br.com.pacotePrincipal.util.Mensagems;
 import br.com.pacotePrincipal.util.TipoMensagem;
 
@@ -33,9 +29,8 @@ import br.com.pacotePrincipal.util.TipoMensagem;
  */
 @Controller
 @Secured("ROLE_ADMIN")
-public class DisciplinaView {
-	private final String CADASTRO_DISCIPLINA = "admin/disciplina/cadastro";
-	private final String LISTA_DISCIPLINA = "admin/disciplina/lista";
+public class CursoView {
+	private final String CADASTRO_LISTA_CURSO = "admin/curso/incluir";
 
 	@Autowired
 	private ConvertCurso convertCurso;
@@ -43,32 +38,17 @@ public class DisciplinaView {
 	@Autowired
 	private ICursoController cursoController;
 	
-	@Autowired
-	private IDisciplinaController disciplinaController;
-	
-
-	/**
-	 * Responsavel por inicializar os converts e registralos no jsp
-	 * 
-	 * @param webDataBinder
-	 */
-	@InitBinder
-	public void intblind(WebDataBinder binder) {
-		binder.registerCustomEditor(Curso.class, this.convertCurso);
-	}
-
 	/**
 	 * Monta o form para view
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/formDisciplina", method = RequestMethod.GET)
-	public ModelAndView formDisciplina() {
-		ModelAndView model = new ModelAndView(CADASTRO_DISCIPLINA);
+	@RequestMapping(value = "/formCurso", method = RequestMethod.GET)
+	public ModelAndView formCurso() {
+		ModelAndView model = new ModelAndView(CADASTRO_LISTA_CURSO);
 		List<Curso> cursos = (List<Curso>) cursoController.findAll();
-
 		model.addObject("cursos", cursos);
-		model.addObject("disciplina", new Disciplina());
+		model.addObject("curso", new Curso());
 		return model;
 	}
 
@@ -77,50 +57,36 @@ public class DisciplinaView {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/incluirDisciplina", method = RequestMethod.POST)
-	public ModelAndView incluir(@ModelAttribute("disciplina") Disciplina disciplina, BindingResult result,
+	@RequestMapping(value = "/incluirCurso", method = RequestMethod.POST)
+	public ModelAndView incluir(@ModelAttribute("curso") Curso curso, BindingResult result,
 			HttpServletRequest request, RedirectAttributes redirect) {
-		ModelAndView model = new ModelAndView();
+		
+		ModelAndView model = new ModelAndView(CADASTRO_LISTA_CURSO);
 		
 		try {
-			disciplina.setCurso(cursoController.findById(Long.valueOf(request.getParameter("curso"))));
-			disciplinaController.save(disciplina);
-			
+			cursoController.save(curso);
+			model =this.formCurso();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
-			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), Mensagems.DisciplinaCadastrada.getMensagem());
-			model.addObject(this.formDisciplina());
+			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Curso Cadastrado");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return model;
 	}
 
-	/**
-	 * Lista a Disciplina para cada curso
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/listaDisciplina", method = RequestMethod.GET)
-	public ModelAndView formLista() {
-		ModelAndView model = new ModelAndView(LISTA_DISCIPLINA);
-		List<Disciplina> disciplinas = (List<Disciplina>) disciplinaController.findAll();
-		model.addObject("disciplinas", disciplinas);
-		return model;
-	}
-	
-	@RequestMapping("/excluirDisciplina")
+	@RequestMapping("/excluirCurso")
 	public ModelAndView exluir(@RequestParam("id")Long id){
-		ModelAndView model = new ModelAndView(LISTA_DISCIPLINA);
+		ModelAndView model = new ModelAndView();
 		try {
-			disciplinaController.delete(id);
-			model.addObject(this.formLista());
+			cursoController.delete(id);
+			
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Disciplina Excluida");
+			model = this.formCurso();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return model;
 	}
 	

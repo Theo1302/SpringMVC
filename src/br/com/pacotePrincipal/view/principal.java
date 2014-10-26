@@ -36,7 +36,6 @@ public class principal {
 				model.setViewName(AliasPaginas.HOME_PROFESSOR);
 			}
 		}
-		model.addObject("nomeUsuario", authe.getName());
 		return model;
 	}
 

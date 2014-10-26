@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +22,6 @@ import br.com.pacotePrincipal.controler.IUsuarioControler;
 import br.com.pacotePrincipal.entidade.Administrador;
 import br.com.pacotePrincipal.entidade.Aluno;
 import br.com.pacotePrincipal.entidade.Professor;
-import br.com.pacotePrincipal.entidade.Role;
 import br.com.pacotePrincipal.entidade.Usuario;
 import br.com.pacotePrincipal.util.Mensagems;
 import br.com.pacotePrincipal.util.TipoMensagem;
@@ -58,9 +56,6 @@ public class UsuarioView {
 	@RequestMapping("/addUsuario")
 	public ModelAndView addUsuario(@ModelAttribute("usuario") Usuario usuario, BindingResult result) {
 		ModelAndView model = new ModelAndView(CADASTRO_USUARIO);
-		for (Administrador a : administradorController.findAll()) {
-			System.out.println(a.getNome());
-		}
 		try {
 		/**
 		 *	Dependendo da Role Atribuida insere a entidade
@@ -123,6 +118,7 @@ public class UsuarioView {
 			} else if (role.equals("ROLE_PROFESSOR")) {
 				professorController.delete(id);
 			}
+			model.addObject(this.listaUsuario(null));
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), Mensagems.UsuarioExcluido.getMensagem());
 		} catch (Exception e) {
@@ -131,6 +127,14 @@ public class UsuarioView {
 			e.printStackTrace();
 		}
 		return model;
-
 	}
+
+	/*********** 		**********/
+	
+
+
+
+
+
+
 }
