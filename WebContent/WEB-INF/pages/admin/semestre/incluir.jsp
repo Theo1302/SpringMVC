@@ -40,7 +40,7 @@
 					<div class="form-group">
 						<label for="nome">Ano e Semestre</label>
 						<form:input type="text" class="form-control" id="anoSemestre"
-							path="anoSemestre" />
+							path="anoSemestre" required="required" />
 					</div>
 					<button type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-saved"></span>Abrir Novo Semestre

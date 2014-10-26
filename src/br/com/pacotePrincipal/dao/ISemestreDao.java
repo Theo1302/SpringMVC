@@ -15,6 +15,9 @@ public interface ISemestreDao extends CrudRepository<Semestre, Long> {
 	 */
 	public long countByStatus(boolean status);
 	
+	
+	public Iterable<Semestre> findAllByOrderByStatusDesc(); 
+	
 	@Override
 	public <S extends Semestre> S save(S semestre);
 	
@@ -26,5 +29,7 @@ public interface ISemestreDao extends CrudRepository<Semestre, Long> {
 	@Override
 	public Semestre findOne(Long id);
 	
+	/*@Query("SELECT id, ano_semestre, status FROM semestre ORDER By status desc")
+	public List<Semestre> todos();*/
 	
 }

@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.pacotePrincipal.controler.IAdministradorController;
 import br.com.pacotePrincipal.controler.IAlunoController;
 import br.com.pacotePrincipal.controler.IProfessorController;
-import br.com.pacotePrincipal.controler.IUsuarioControler;
 import br.com.pacotePrincipal.entidade.Administrador;
 import br.com.pacotePrincipal.entidade.Aluno;
 import br.com.pacotePrincipal.entidade.Professor;
@@ -33,8 +32,7 @@ public class UsuarioView {
 	private final String CADASTRO_USUARIO = "admin/usuario/cadastroUsuario";
 	private final String LISTA_USUARIO = "admin/usuario/listaUsuario";
 
-	@Autowired
-	private IUsuarioControler usuarioControler;
+	
 	
 	@Autowired
 	private IAdministradorController administradorController;
@@ -128,13 +126,4 @@ public class UsuarioView {
 		}
 		return model;
 	}
-
-	/*********** 		**********/
-	
-
-
-
-
-
-
 }

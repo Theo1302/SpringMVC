@@ -1,8 +1,11 @@
 package br.com.pacotePrincipal.view;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.pacotePrincipal.controler.ISemestreController;
@@ -55,12 +59,15 @@ public class SemestreView {
 
 		ModelAndView model = new ModelAndView();
 		try {
-			semestreController.save(semestre);
+			
 			model = this.formSemestre();
+			semestreController.save(semestre);
+			
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Semestre Aberto");
 
 		} catch (RNException e) {
+			
 			model = this.formSemestre();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.ERRO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), e.getMensagem());

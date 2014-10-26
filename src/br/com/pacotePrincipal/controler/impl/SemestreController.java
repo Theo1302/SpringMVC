@@ -24,13 +24,14 @@ public class SemestreController implements ISemestreController {
 		if (semestreDao.countByStatus(true) > 0) {
 			throw new RNException("Já Existe Semestre em aberto !!");
 		}else{
+			semestre.setStatus(true);
 			return semestreDao.save(semestre);
 		}
 	}
 
 	@Override
 	public Iterable<Semestre> findAll() {
-		return semestreDao.findAll();
+		return semestreDao.findAllByOrderByStatusDesc();
 	}
 
 	@Override
