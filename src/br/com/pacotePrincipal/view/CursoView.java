@@ -86,6 +86,7 @@ public class CursoView {
 			model = this.formCurso();
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 		return model;
 	}

@@ -1,5 +1,7 @@
 package br.com.pacotePrincipal.controler.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,17 @@ public class DisciplinaController implements IDisciplinaController{
 	@Override
 	public <S extends Disciplina> S save(S disciplina) {
 		return disciplinaDao.save(disciplina);
+	}
+
+	@Override
+	public List<Disciplina> listaDisciplina() {
+		List<Disciplina> listaDisciplina = (List<Disciplina>)  disciplinaDao.findAll(); 
+		for (int i = 0; i < listaDisciplina.size(); i++) {
+			if (listaDisciplina.get(i).getProfessor() != null) {
+				listaDisciplina.remove(i);
+			}
+		}
+		return listaDisciplina;
 	}
 
 }

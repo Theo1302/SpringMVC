@@ -78,21 +78,18 @@ public class DisciplinaView {
 	 * @return
 	 */
 	@RequestMapping(value = "/incluirDisciplina", method = RequestMethod.POST)
-	public ModelAndView incluir(@ModelAttribute("disciplina") Disciplina disciplina, BindingResult result,
-			HttpServletRequest request, RedirectAttributes redirect) {
-		ModelAndView model = new ModelAndView();
-		
+	public ModelAndView incluir(@ModelAttribute("disciplina") Disciplina disciplina, BindingResult result,HttpServletRequest request, RedirectAttributes redirect) {
+		ModelAndView model = new ModelAndView(LISTA_DISCIPLINA);
 		try {
 			disciplina.setCurso(cursoController.findById(Long.valueOf(request.getParameter("curso"))));
 			disciplinaController.save(disciplina);
 			
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), Mensagems.DisciplinaCadastrada.getMensagem());
-			model.addObject(this.formDisciplina());
+			model = this.reload(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return model;
 	}
 
@@ -113,16 +110,22 @@ public class DisciplinaView {
 	public ModelAndView exluir(@RequestParam("id")Long id){
 		ModelAndView model = new ModelAndView(LISTA_DISCIPLINA);
 		try {
-			disciplinaController.delete(id);
-			model.addObject(this.formLista());
+			disciplinaController.delete(id);	
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Disciplina Excluida");
+			model  = this.reload(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return model;
 	}
 	
+	
+	private ModelAndView reload(ModelAndView model){
+		List<Disciplina> disciplinas = (List<Disciplina>) disciplinaController.findAll();
+		model.addObject("disciplinas", disciplinas);
+		return model;
+		
+	}
 
 }

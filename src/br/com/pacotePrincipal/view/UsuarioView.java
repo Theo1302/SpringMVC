@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.sql.Alias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import br.com.pacotePrincipal.entidade.Administrador;
 import br.com.pacotePrincipal.entidade.Aluno;
 import br.com.pacotePrincipal.entidade.Professor;
 import br.com.pacotePrincipal.entidade.Usuario;
+import br.com.pacotePrincipal.util.AliasPaginas;
 import br.com.pacotePrincipal.util.Mensagems;
 import br.com.pacotePrincipal.util.TipoMensagem;
 
@@ -29,9 +31,7 @@ import br.com.pacotePrincipal.util.TipoMensagem;
 @Secured("ROLE_ADMIN")
 public class UsuarioView {
 	/********* PATH DA PAGINAS ***********/
-	private final String CADASTRO_USUARIO = "admin/usuario/cadastroUsuario";
-	private final String LISTA_USUARIO = "admin/usuario/listaUsuario";
-
+	
 	
 	
 	@Autowired
@@ -46,14 +46,14 @@ public class UsuarioView {
 	
 	@RequestMapping(value = "/formUsuario", method = RequestMethod.GET)
 	public ModelAndView formUsuario() {
-		ModelAndView model = new ModelAndView(CADASTRO_USUARIO);
+		ModelAndView model = new ModelAndView(AliasPaginas.CADASTRO_USUARIO);
 		model.addObject("usuario", new Usuario());
 		return model;
 	}
 
 	@RequestMapping("/addUsuario")
 	public ModelAndView addUsuario(@ModelAttribute("usuario") Usuario usuario, BindingResult result) {
-		ModelAndView model = new ModelAndView(CADASTRO_USUARIO);
+		ModelAndView model = new ModelAndView(LISTA_USUARIO);
 		try {
 		/**
 		 *	Dependendo da Role Atribuida insere a entidade
@@ -72,7 +72,8 @@ public class UsuarioView {
 		
 		model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 		model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), Mensagems.UsuarioCadastrado.getMensagem());
-		model.addObject("usuario", new Usuario());
+		model.addObject("usuarios", listaUsuario());
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,23 +83,8 @@ public class UsuarioView {
 	@RequestMapping("/listaUsuario")
 	public ModelAndView listaUsuario(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(LISTA_USUARIO);
-		Usuario usuario;
 		try {
-			List<Usuario> listUsuario = new ArrayList<>();
-			
-			for (Aluno aluno : alunoController.findAll()) {
-				usuario = new Usuario(aluno.getId(), aluno.getEmail(), aluno.getSenha(), aluno.getNome(), aluno.getRole());
-				listUsuario.add(usuario);
-			}
-			for (Professor professor : professorController.findAll()) {
-				usuario = new Usuario(professor.getId(), professor.getEmail(), professor.getSenha(), professor.getNome(), professor.getRole());
-				listUsuario.add(usuario);
-			}
-			for (Administrador administrador : administradorController.findAll()) {
-				usuario = new Usuario(administrador.getId(), administrador.getEmail(), administrador.getSenha(), administrador.getNome(), administrador.getRole());
-				listUsuario.add(usuario);
-			}
-			model.addObject("usuarios", listUsuario);
+			model.addObject("usuarios", listaUsuario());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,4 +112,25 @@ public class UsuarioView {
 		}
 		return model;
 	}
+	
+	
+	private List<Usuario> listaUsuario(){
+		Usuario usuario;
+		List<Usuario> listUsuario = new ArrayList<>();
+		
+		for (Aluno aluno : alunoController.findAll()) {
+			usuario = new Usuario(aluno.getId(), aluno.getEmail(), aluno.getSenha(), aluno.getNome(), aluno.getRole());
+			listUsuario.add(usuario);
+		}
+		for (Professor professor : professorController.findAll()) {
+			usuario = new Usuario(professor.getId(), professor.getEmail(), professor.getSenha(), professor.getNome(), professor.getRole());
+			listUsuario.add(usuario);
+		}
+		for (Administrador administrador : administradorController.findAll()) {
+			usuario = new Usuario(administrador.getId(), administrador.getEmail(), administrador.getSenha(), administrador.getNome(), administrador.getRole());
+			listUsuario.add(usuario);
+		}
+		return listUsuario;
+	}
+	
 }
