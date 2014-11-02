@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.ShoolDrive.entidade.Professor;
 import br.com.ShoolDrive.entidade.Role;
-import br.com.ShoolDrive.entidade.Usuario;
 
 public interface IProfessorController{
 	/**
@@ -21,7 +20,7 @@ public interface IProfessorController{
 	 * @param id
 	 * @return
 	 */
-	Professor findById(int id);
+	Professor findById(Long id);
 
 	/**
 	 * Pesquisa pela role
@@ -40,8 +39,8 @@ public interface IProfessorController{
 	// Metodos Spring
 
 	
-	public void delete(Long arg0);
+	public void delete(Long id);
 	
 	
-	public void save(Professor arg0);
+	public void save(Professor professor);
 }

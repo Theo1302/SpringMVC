@@ -20,7 +20,7 @@ public interface IProfessorDao extends CrudRepository<Professor, Long> {
 	 * @param id
 	 * @return
 	 */
-	Professor findById(int id);
+	Professor findById(Long id);
 
 	/**
 	 * Pesquisa pela role

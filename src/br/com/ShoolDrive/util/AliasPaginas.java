@@ -24,5 +24,9 @@ public class AliasPaginas {
 	
 	//VIEW Outros
 	public final static String VIEW_ALOCAR_PROFESSOR = "admin/outros/alocarProfesso";
+	
+	
+	//curso
+	public final static String CADASTRO_LISTA_CURSO = "admin/curso/incluir";
 
 }

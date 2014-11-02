@@ -42,8 +42,8 @@ public class DisciplinaController implements IDisciplinaController {
 	public List<Disciplina> listaDisciplina() throws RNException {
 		List<Disciplina> listaDisciplina = (List<Disciplina>) disciplinaDao.findAll();
 		
-		if (listaDisciplina == null) {
-			throw new RNException("Não a Disciplinas Cadastrada!!");
+		if (listaDisciplina.size() == 0) {
+			throw new RNException("NÃ£o a Disciplinas Cadastrada!!");
 		}
 		
 		for (int i = 0; i < listaDisciplina.size(); i++) {
@@ -53,7 +53,7 @@ public class DisciplinaController implements IDisciplinaController {
 		}
 		
 		if (listaDisciplina.size() <= 0) {
-			throw new RNException("Não a Disciplinas Sem professor alocado");
+			throw new RNException("NÃ£o a Disciplinas Sem professor alocado");
 		}
 
 		return listaDisciplina;

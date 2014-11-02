@@ -21,7 +21,7 @@ public class ConvertProfessor  extends PropertyEditorSupport {
 		Professor professor = null;
 		
 		try {
-			 professor = professorControler.findById(Integer.valueOf(id));
+			 professor = professorControler.findById(Long.valueOf(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

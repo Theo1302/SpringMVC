@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.ShoolDrive.controler.ICursoController;
 import br.com.ShoolDrive.convert.ConvertCurso;
 import br.com.ShoolDrive.entidade.Curso;
+import br.com.ShoolDrive.util.AliasPaginas;
 import br.com.ShoolDrive.util.Mensagems;
 import br.com.ShoolDrive.util.TipoMensagem;
 
@@ -30,7 +31,7 @@ import br.com.ShoolDrive.util.TipoMensagem;
 @Controller
 @Secured("ROLE_ADMIN")
 public class CursoView {
-	private final String CADASTRO_LISTA_CURSO = "admin/curso/incluir";
+	
 
 	@Autowired
 	private ConvertCurso convertCurso;
@@ -45,7 +46,7 @@ public class CursoView {
 	 */
 	@RequestMapping(value = "/formCurso", method = RequestMethod.GET)
 	public ModelAndView formCurso() {
-		ModelAndView model = new ModelAndView(CADASTRO_LISTA_CURSO);
+		ModelAndView model = new ModelAndView(AliasPaginas.CADASTRO_LISTA_CURSO);
 		List<Curso> cursos = (List<Curso>) cursoController.findAll();
 		model.addObject("cursos", cursos);
 		model.addObject("curso", new Curso());
@@ -61,7 +62,7 @@ public class CursoView {
 	public ModelAndView incluir(@ModelAttribute("curso") Curso curso, BindingResult result,
 			HttpServletRequest request, RedirectAttributes redirect) {
 		
-		ModelAndView model = new ModelAndView(CADASTRO_LISTA_CURSO);
+		ModelAndView model = new ModelAndView(AliasPaginas.CADASTRO_LISTA_CURSO);
 		
 		try {
 			cursoController.save(curso);
@@ -80,10 +81,11 @@ public class CursoView {
 		ModelAndView model = new ModelAndView();
 		try {
 			cursoController.delete(id);
-			
+			model=this.formCurso();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Disciplina Excluida");
-			model = this.formCurso();
+			
+			//model.setViewName("redirect:formCurso");
 		} catch (Exception e) {
 			e.printStackTrace();
 			

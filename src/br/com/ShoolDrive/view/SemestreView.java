@@ -35,8 +35,9 @@ public class SemestreView {
 	 * @return
 	 */
 	@RequestMapping(value = "/formSemestre", method = RequestMethod.GET)
-	public ModelAndView formSemestre() {
-		ModelAndView model = new ModelAndView(AliasPaginas.CADASTRO_LISTA_SEMESTRE);
+	public ModelAndView formSemestre(ModelAndView model) {
+		model.setViewName(AliasPaginas.CADASTRO_LISTA_SEMESTRE);
+		//ModelAndView model = new ModelAndView(AliasPaginas.CADASTRO_LISTA_SEMESTRE);
 		List<Semestre> semestres = (List<Semestre>) semestreController.findAll();
 		model.addObject("semestres", semestres);
 		model.addObject("semestre", new Semestre());
@@ -57,8 +58,9 @@ public class SemestreView {
 			semestreController.save(semestre);	
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Semestre Aberto");
-
+			model.addObject(this.formSemestre(model));
 		} catch (RNException e) {
+			model.addObject(this.formSemestre(model));
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.ERRO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), e.getMensagem());
 		} catch (Exception e) {
@@ -74,6 +76,7 @@ public class SemestreView {
 			semestreController.fecharSemestre(id);
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Semestre Fechado");
+			model.addObject(this.formSemestre(model));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

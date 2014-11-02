@@ -1,10 +1,16 @@
 package br.com.ShoolDrive.controler.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ShoolDrive.controler.ISemestreController;
+import br.com.ShoolDrive.dao.ICursoDao;
+import br.com.ShoolDrive.dao.IDisciplinaDao;
 import br.com.ShoolDrive.dao.ISemestreDao;
+import br.com.ShoolDrive.entidade.Curso;
+import br.com.ShoolDrive.entidade.Disciplina;
 import br.com.ShoolDrive.entidade.Semestre;
 import br.com.ShoolDrive.exception.RNException;
 import br.com.ShoolDrive.util.Util;
@@ -14,6 +20,12 @@ public class SemestreController implements ISemestreController {
 
 	@Autowired
 	private ISemestreDao semestreDao;
+	
+	@Autowired
+	private ICursoDao cursoDao;
+	
+	@Autowired
+	private IDisciplinaDao disciplinaDao;
 	
 	
 	@Override
@@ -25,7 +37,13 @@ public class SemestreController implements ISemestreController {
 			throw new RNException("JÃ! Existe Semestre em aberto !!");
 		}else{
 			semestre.setStatus(true);
-			return semestreDao.save(semestre);
+			semestreDao.save(semestre);
+			List<Curso> cursos = (List<Curso>) cursoDao.findAll();
+			for (Curso curso : cursos) {
+				curso.setSemestre(semestre);
+				cursoDao.save(curso);
+			}
+			return semestre;
 		}
 	}
 
@@ -44,6 +62,23 @@ public class SemestreController implements ISemestreController {
 		Semestre semestre = semestreDao.findOne(id);
 		semestre.setStatus(false);
 		semestreDao.save(semestre);
+		
+		
+		//recupera todas as disciplinas e desaloca todos os professores e atualiza
+		List<Disciplina> disciplinas = (List<Disciplina>) disciplinaDao.findAll();
+		for (Disciplina disciplina : disciplinas) {
+			disciplina.setProfessor(null);
+			disciplinaDao.save(disciplina);
+		}
+		
+		//recupera todos os cursos e retira do semestre atual
+		List<Curso> cursos = (List<Curso>) cursoDao.findAll();
+		for (Curso curso : cursos) {
+			curso.setSemestre(null);
+			cursoDao.save(curso);
+		}
+		
+		
 		/**
 		 * Falta fazer toda a logica de fechamento de fechamento
 		 */

@@ -21,7 +21,7 @@ public class ProfessorControler implements IProfessorController {
 	}
 
 	@Override
-	public Professor findById(int id) {
+	public Professor findById(Long id) {
 		return professorDao.findById(id);
 	}
 

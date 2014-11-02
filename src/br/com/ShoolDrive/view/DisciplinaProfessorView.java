@@ -1,11 +1,12 @@
 package br.com.ShoolDrive.view;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,10 +55,14 @@ public class DisciplinaProfessorView {
 	
 	@RequestMapping(value = "/formAlocarProfessor", method = RequestMethod.GET)
 	public ModelAndView formAlocarProfessor(){
-		ModelAndView model = new ModelAndView(AliasPaginas.VIEW_ALOCAR_PROFESSOR);
-		try {
+		ModelAndView model =new ModelAndView(AliasPaginas.VIEW_ALOCAR_PROFESSOR);
 		
-		model.addObject("professores", professorController.findAll());
+		try {
+			List<Professor> professores = professorController.findAll();
+			if (professores == null || professores.size() == 0) {
+				throw new RNException("Não há professor para alocação");
+			}
+		model.addObject("professores", professores);
 		model.addObject("disciplinas", disciplinaController.listaDisciplina());
 		} catch (RNException e) {
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.ERRO.getValor());
@@ -73,13 +78,14 @@ public class DisciplinaProfessorView {
 	 * @return
 	 */
 	@RequestMapping(value = "/alocarProfessor", method = RequestMethod.POST)
-	public ModelAndView alocar(BindingResult result,HttpServletRequest request, RedirectAttributes redirect) {
+	public ModelAndView alocar(HttpServletRequest request, RedirectAttributes redirect) {
 		ModelAndView model = new ModelAndView(AliasPaginas.VIEW_ALOCAR_PROFESSOR);
+		
 		Disciplina disciplina;
 		Professor professor;
 		try {
 			disciplina = disciplinaController.findOne(Long.valueOf(request.getParameter("disciplina")));
-			professor = professorController.findById(Integer.valueOf(request.getParameter("professor")));
+			professor = professorController.findById(Long.valueOf(request.getParameter("professor")));
 			
 			//Adiciona o professor a disciplina
 			disciplina.setProfessor(professor);
@@ -88,9 +94,9 @@ public class DisciplinaProfessorView {
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Professor Alocado A disciplina !!");
 			
-			model.addObject("professores", professorController.findAll());
-			model.addObject("disciplinas", disciplinaController.listaDisciplina());
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 			model.setViewName("redirect:home");
 			model.addObject(TipoMensagem.VARIAVEL_VIEW.getValor(), TipoMensagem.ERRO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW.getMensagem(), "Ocorreu um erro !");

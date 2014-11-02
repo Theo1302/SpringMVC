@@ -15,6 +15,12 @@ public interface ISemestreDao extends CrudRepository<Semestre, Long> {
 	 */
 	public long countByStatus(boolean status);
 	
+	/**
+	 * Recupera o semestre com status passado
+	 * @param status
+	 * @return
+	 */
+	public Semestre findByStatus(boolean status);
 	
 	public Iterable<Semestre> findAllByOrderByStatusDesc(); 
 	
