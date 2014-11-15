@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ShoolDrive.controler.ISemestreController;
+import br.com.ShoolDrive.dao.IAlunoDao;
 import br.com.ShoolDrive.dao.ICursoDao;
 import br.com.ShoolDrive.dao.IDisciplinaDao;
 import br.com.ShoolDrive.dao.ISemestreDao;
@@ -27,6 +28,9 @@ public class SemestreController implements ISemestreController {
 	@Autowired
 	private IDisciplinaDao disciplinaDao;
 	
+	@Autowired
+	private IAlunoDao alunoDao;
+	
 	
 	@Override
 	public <S extends Semestre> S save(S semestre) throws RNException {
@@ -34,7 +38,7 @@ public class SemestreController implements ISemestreController {
 			throw new RNException("Data de abertura do Semestre diferente do ano Atual !!");
 		}
 		if (semestreDao.countByStatus(true) > 0) {
-			throw new RNException("JÃ! Existe Semestre em aberto !!");
+			throw new RNException("JÃ¡! Existe Semestre em aberto !!");
 		}else{
 			semestre.setStatus(true);
 			semestreDao.save(semestre);
@@ -77,6 +81,8 @@ public class SemestreController implements ISemestreController {
 			curso.setSemestre(null);
 			cursoDao.save(curso);
 		}
+		
+	
 		
 		
 		/**

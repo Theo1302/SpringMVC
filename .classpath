@@ -118,5 +118,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-data-commons-core-1.4.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-data-jpa-1.7.0.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-data-jpa-1.7.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/apache-logging-log4j.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
