@@ -35,7 +35,7 @@
 						<li><a href="formSemestre">Semestre</a></li>
 						<li><a href="formCurso">Curso</a></li>
 						<li><a href="formDisciplina">Disciplina</a></li>
-						<li><a href="formAlocarProfessor">Configurações</a></li>
+						<li><a href="formAlocarProfessor">Alocar Professor</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						
@@ -51,6 +51,4 @@
 			<!-- /.container-fluid -->
 		</nav>
 	</div>
-
-
 </sec:authorize>
