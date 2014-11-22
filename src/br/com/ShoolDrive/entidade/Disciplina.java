@@ -23,11 +23,11 @@ public class Disciplina implements Serializable {
 	public Disciplina() {}
 	
 	@Id
-	@Column(name = "disciplina_id", nullable = false)
+	@Column(name = "disciplina_id")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "disciplina_seq")
 	private long id;
 	
-	@Column(name="nome" ,nullable = false)
+	@Column(name="nome")
 	private String nome;
 	
 	@ManyToOne

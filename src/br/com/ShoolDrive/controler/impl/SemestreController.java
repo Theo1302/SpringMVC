@@ -75,12 +75,16 @@ public class SemestreController implements ISemestreController {
 			disciplinaDao.save(disciplina);
 		}
 		
+		semestreDao.deletarRegistroDisciciplina();
+		
 		//recupera todos os cursos e retira do semestre atual
 		List<Curso> cursos = (List<Curso>) cursoDao.findAll();
 		for (Curso curso : cursos) {
 			curso.setSemestre(null);
 			cursoDao.save(curso);
 		}
+		
+		
 		
 	
 		

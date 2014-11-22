@@ -44,13 +44,13 @@ public class Administrador implements Serializable {
 
 
 
-	@Column(name = "email", length = 150, nullable = false)
+	@Column(name = "email", length = 150)
 	private String email;
 
-	@Column(name = "senha", length = 100, nullable = false)
+	@Column(name = "senha", length = 100)
 	private String senha;
 
-	@Column(name = "nome", length = 100, nullable = false)
+	@Column(name = "nome", length = 100)
 	private String nome;
 
 	@Enumerated(EnumType.STRING)

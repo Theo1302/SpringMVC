@@ -11,9 +11,7 @@
 <title>SchoolDrive</title>
 </head>
 <body>
-
 	<jsp:include page="../topoAdmin.jsp"></jsp:include>
-
 	<!-- Corpo da pagina -->
 	<div class="container">
 		<div class="row">
@@ -47,7 +45,6 @@
 				<div class="page-header">
 					<h3>Cursos Cadastrados</h3>
 				</div>
-
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<thead align="center">

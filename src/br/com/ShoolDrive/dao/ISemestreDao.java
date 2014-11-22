@@ -1,5 +1,8 @@
 package br.com.ShoolDrive.dao;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +38,8 @@ public interface ISemestreDao extends CrudRepository<Semestre, Long> {
 	@Override
 	public Semestre findOne(Long id);
 	
-	/*@Query("SELECT id, ano_semestre, status FROM semestre ORDER By status desc")
-	public List<Semestre> todos();*/
+	
+	@Query(value="TRUNCATE registrado_disciplina RESTART IDENTITY",nativeQuery=true)
+	public List<Semestre> deletarRegistroDisciciplina();
 	
 }
