@@ -67,7 +67,6 @@ public class SemestreController implements ISemestreController {
 		semestre.setStatus(false);
 		semestreDao.save(semestre);
 		
-		
 		//recupera todas as disciplinas e desaloca todos os professores e atualiza
 		List<Disciplina> disciplinas = (List<Disciplina>) disciplinaDao.findAll();
 		for (Disciplina disciplina : disciplinas) {
@@ -83,6 +82,7 @@ public class SemestreController implements ISemestreController {
 			curso.setSemestre(null);
 			cursoDao.save(curso);
 		}
+		
 		
 		
 		
