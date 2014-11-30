@@ -32,7 +32,7 @@
 				<form action="alocarProfessor" method="post" role="form">
 					<div class="form-group">
 						<label>Escolha um Professor</label> 
-						<select name="professor"	cssClass="form-control">
+						<select name="professor"	cssClass="form-control" required='required'>
 							<c:forEach var="professor" items="${professores}">
 								<option value="${professor.id}"><c:out value="${professor.nome}" /></option>
 							</c:forEach>
@@ -40,7 +40,7 @@
 					</div>
 					<div class="form-group">
 						<label>Escolha a Disciplina</label> 
-						<select name="disciplina"	cssClass="form-control">
+						<select name="disciplina"	cssClass="form-control" required='required'>
 							<c:forEach var="disciplina" items="${disciplinas}">
 								<option value="${disciplina.id}"><c:out value="${disciplina.nome}" /></option>
 							</c:forEach>

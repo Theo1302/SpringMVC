@@ -11,9 +11,7 @@
 <title>SchoolDrive</title>
 </head>
 <body>
-
 	<jsp:include page="../topoAdmin.jsp"></jsp:include>
-
 	<!-- Corpo da pagina -->
 	<div class="container">
 		<div class="row">
@@ -38,7 +36,7 @@
 					<button type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-saved"></span>Cadastrar Curso
 					</button>
-					<a href="/">Voltar</a>
+					
 				</form:form>
 			</div>
 		</div>
@@ -47,7 +45,6 @@
 				<div class="page-header">
 					<h3>Cursos Cadastrados</h3>
 				</div>
-
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<thead align="center">

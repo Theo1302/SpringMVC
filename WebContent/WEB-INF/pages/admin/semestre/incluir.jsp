@@ -31,6 +31,7 @@
 					<jsp:param value="${tipo}" name="tipo" />
 					<jsp:param value="${mensagens}" name="mensagens" />
 				</jsp:include>
+				
 				<div class="page-header">
 					<h3>Abrir Semestre</h3>
 				</div>
@@ -71,7 +72,7 @@
 										<td><c:choose>
 												<c:when test="${! semestre.status}">
 													<a disabled class="btn btn-default"> <span
-														class="glyphicon glyphicon-remove-sign"></span> Fechar
+														class="glyphicon glyphicon-remove-sign"></span> Fechado
 													</a>
 												</c:when>
 												<c:when test="${semestre.status}">
