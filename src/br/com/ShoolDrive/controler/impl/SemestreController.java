@@ -34,7 +34,12 @@ public class SemestreController implements ISemestreController {
 	@Override
 	public <S extends Semestre> S save(S semestre) throws RNException {
 		// Verifica se tem semestre com o mesmo nome
-		Boolean IsSemestreIqual = semestreDao.findByanoSemestre(semestre.getAnoSemestre()) != null ? true : false;
+		Boolean IsSemestreIqual = semestreDao.findByanoSemestre(semestre
+				.getAnoSemestre()) != null ? true : false;
+		if ((Integer.parseInt(semestre.getAnoSemestre().substring(5)) < 1 || 
+			(Integer.parseInt(semestre.getAnoSemestre().substring(5)) > 2 ))) {
+			throw new RNException("Semestre Invalido !!");
+		}
 		if (semestreDao.countByStatus(true) > 0) {
 			throw new RNException(
 					"Não é possível criar um novo semestre com um semestre aberto!!");
@@ -44,13 +49,13 @@ public class SemestreController implements ISemestreController {
 					throw new RNException(
 							"Não é possível criar um semestre com o ano e ou Periodo, menor ou igual aos últimos listados!!");
 				}
-				if (!(Integer.parseInt(semestre.getAnoSemestre().substring(5)) > Integer
+				/*if (!(Integer.parseInt(semestre.getAnoSemestre().substring(5)) > Integer
 						.parseInt(((List<Semestre>) semestreDao
 								.findAllByOrderByStatusDesc()).iterator()
 								.next().getAnoSemestre().substring(5)))) {
 					throw new RNException(
 							"Não é possível criar um semestre com o ano e ou Periodo, menor ou igual aos últimos listados!!");
-				}
+				}*/
 			}
 			if (!(semestre.getAnoSemestre().substring(0, 4).equals(Util
 					.getDataAtual().substring(6, 10)))) {
