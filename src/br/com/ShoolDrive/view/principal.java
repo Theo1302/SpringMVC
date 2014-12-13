@@ -15,7 +15,7 @@ public class principal {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
-		return "index";
+		return "login";
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
