@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.ShoolDrive.util.AliasPaginas;
 
 @Controller
-public class principal {
+public class PrincipalAdminView {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {

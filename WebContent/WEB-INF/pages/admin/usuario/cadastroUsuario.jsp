@@ -6,8 +6,6 @@
 <html>
 <head>
 <jsp:include page="../../css.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="resources/css/admin/usuario.css" />" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SchoolDrive</title>
@@ -18,11 +16,9 @@
 
 
 	<!-- Corpo da pagina -->
-
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<jsp:include page="../MenuLateral.jsp"></jsp:include>
-
 			<div class="col-md-7">
 
 
@@ -39,6 +35,7 @@
 							<h2>Cadastro de Usuario</h2>
 						</div>
 					</div>
+					
 					<div class="col-md-offset-2 col-md-4">
 						<div class="page-header">
 							<div class="btn-group btn-group-justified">
