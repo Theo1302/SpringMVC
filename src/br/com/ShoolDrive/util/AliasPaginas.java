@@ -28,5 +28,11 @@ public class AliasPaginas {
 	
 	//curso
 	public final static String CADASTRO_LISTA_CURSO = "admin/curso/incluir";
+	
+	
+	/****** View Professor *******/
+	
+	public final static String VIEW_INCLUIR_TRABALHO = "professor/trabalho/incluir";
+	
 
 }

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,7 +26,7 @@ public class Aluno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "aluno_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "aluno_seq")
 	private long id;
 
@@ -55,16 +56,25 @@ public class Aluno implements Serializable {
 	private Role role;
 	
 	@ManyToOne
-	@JoinColumn(name="curso_id")
+	@JoinColumn(name="cursoId")
 	private Curso curso;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="registrado_disciplina",
-			joinColumns={@JoinColumn(name="aluno_id")},
-			inverseJoinColumns={@JoinColumn(name="disciplina_id")})
+			joinColumns={@JoinColumn(name="alunoId")},
+			inverseJoinColumns={@JoinColumn(name="disciplinaId")})
 	private List<Disciplina> disciplinas; 
 
+	@OneToMany(mappedBy="aluno",fetch=FetchType.LAZY)
+	private List<Entrega> entregas;
+	
 
+	public List<Entrega> getEntregas() {
+		return entregas;
+	}
+	public void setEntregas(List<Entrega> entregas) {
+		this.entregas = entregas;
+	}
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}

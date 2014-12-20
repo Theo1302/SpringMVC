@@ -13,9 +13,9 @@
 
 	<!-- Import de todas as configuraçoes sepadara por camada -->
 
-	<!--JDBC -->
+	<!--JDBC/ORM -->
 	<import resource="spring-data.xml" />
-
+	
 	<!--MVC -->
 	<import resource="spring-mvc.xml" />
 

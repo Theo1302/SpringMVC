@@ -24,7 +24,7 @@ public class Disciplina implements Serializable {
 	public Disciplina() {}
 	
 	@Id
-	@Column(name = "disciplina_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "disciplina_seq")
 	private long id;
 	
@@ -32,11 +32,11 @@ public class Disciplina implements Serializable {
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name="professor_id")
+	@JoinColumn(name="professorId")
 	private Professor professor;
 	
 	@ManyToOne
-	@JoinColumn(name="curso_id")
+	@JoinColumn(name="cursoId")
 	private Curso curso;
 	
 	@ManyToMany(mappedBy="disciplinas",fetch=FetchType.LAZY)
