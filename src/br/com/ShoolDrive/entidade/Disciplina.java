@@ -32,11 +32,11 @@ public class Disciplina implements Serializable {
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name="professorId")
+	@JoinColumn(name="professor_id")
 	private Professor professor;
 	
 	@ManyToOne
-	@JoinColumn(name="cursoId")
+	@JoinColumn(name="curso_id")
 	private Curso curso;
 	
 	@ManyToMany(mappedBy="disciplinas",fetch=FetchType.LAZY)

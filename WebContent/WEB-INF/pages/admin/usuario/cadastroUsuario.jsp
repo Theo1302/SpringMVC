@@ -51,8 +51,7 @@
 
 				<div class="row">
 					<div class="col-md-6">
-						<form:form role="form" method="post" action="addUsuario"
-							modelAttribute="usuario">
+						<form:form role="form" method="post" action="addUsuario" modelAttribute="usuario">
 							<div class="form-group">
 								<label for="nome">Nome Completo*</label>
 								<form:input type="text" class="form-control" id="nome" path="nome" />

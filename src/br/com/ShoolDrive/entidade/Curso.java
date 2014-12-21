@@ -37,7 +37,7 @@ public class Curso implements Serializable{
 	private List<Disciplina> disciplina;
 	
 	@ManyToOne
-	@JoinColumn(name="semestreId")
+	@JoinColumn(name="semestre_id")
 	private Semestre semestre;
 	
 	@OneToMany(mappedBy="curso",fetch=FetchType.LAZY)

@@ -56,13 +56,13 @@ public class Aluno implements Serializable {
 	private Role role;
 	
 	@ManyToOne
-	@JoinColumn(name="cursoId")
+	@JoinColumn(name="curso_id")
 	private Curso curso;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="registrado_disciplina",
-			joinColumns={@JoinColumn(name="alunoId")},
-			inverseJoinColumns={@JoinColumn(name="disciplinaId")})
+			joinColumns={@JoinColumn(name="aluno_id")},
+			inverseJoinColumns={@JoinColumn(name="disciplina_id")})
 	private List<Disciplina> disciplinas; 
 
 	@OneToMany(mappedBy="aluno",fetch=FetchType.LAZY)
