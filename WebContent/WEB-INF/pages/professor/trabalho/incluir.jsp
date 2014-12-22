@@ -46,9 +46,9 @@
 					<div class="col-md-offset-2 col-md-4">
 						<div class="page-header">
 							<div class="btn-group btn-group-justified">
-								<a class="btn btn-default" href="formUsuario"> <span
+								<a class="btn btn-default" href="formPublicarTrabalho"> <span
 									class="glyphicon glyphicon-plus"> </span> Cadastro Trabalho
-								</a> <a class="btn btn-default" href="listaUsuario"> <span
+								</a> <a class="btn btn-default" href="listaTrabalhos"> <span
 									class="glyphicon glyphicon-search"></span> Lista Trabalho
 								</a>
 							</div>
@@ -66,7 +66,7 @@
 
 						<div class="form-group">
 							<label>Prazo Entrega</label>
-							<form:input path="dataLimite" cssClass="form-control" type="date" />
+							<form:input path="dataLimite"  id="dataEntrega" cssClass="form-control" type="date" />
 						</div>
 
 						<label>Disciplina</label>
@@ -80,7 +80,7 @@
 								</c:forEach>
 							</select>
 
-							<button class="btn btn-success" type="submit">
+							<button class="btn btn-success" id="btnSalvar" type="submit">
 								<span class="glyphicon glyphicon-saved"> </span> Salvar e Publicar
 							</button>
 						</div>

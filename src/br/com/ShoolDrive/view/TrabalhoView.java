@@ -21,6 +21,7 @@ import br.com.ShoolDrive.convert.ConvertDisciplina;
 import br.com.ShoolDrive.entidade.Disciplina;
 import br.com.ShoolDrive.entidade.Professor;
 import br.com.ShoolDrive.entidade.Trabalho;
+import br.com.ShoolDrive.exception.RNException;
 import br.com.ShoolDrive.util.AliasPaginas;
 import br.com.ShoolDrive.util.Mensagems;
 import br.com.ShoolDrive.util.TipoMensagem;
@@ -73,10 +74,14 @@ public class TrabalhoView {
     @RequestMapping(value = "/incluirTrabalho", method = RequestMethod.POST)
     public ModelAndView incluirTrabalho(@ModelAttribute("trabalho") Trabalho trabalho,
             @RequestParam("disciplina") Long disciplinaID) {
+        ModelAndView model = new ModelAndView("redirect:formPublicarTrabalho");
 
-        ModelAndView model = new ModelAndView();
+        String ano = trabalho.getDataLimite().substring(0, 4);
+        String mes = trabalho.getDataLimite().substring(5, 7);
+        String dia = trabalho.getDataLimite().substring(8, 10);
 
-        model.setViewName("redirect:formPublicarTrabalho");
+        String dataFormatada = dia + "/" + mes + "/" + ano;
+        trabalho.setDataLimite(dataFormatada);
         try {
             trabalho.setDisciplina(this.disciplinaController.findOne(disciplinaID));
 
@@ -91,4 +96,18 @@ public class TrabalhoView {
         }
         return model;
     }
+
+    @RequestMapping("/listaTrabalhos")
+    public ModelAndView listaTrabalho() {
+        ModelAndView model = new ModelAndView(AliasPaginas.VIEW_LISTA_TRABALHO);
+        try {
+            model.addObject("trabalhos", this.trabalhoController.findAll());
+        } catch (RNException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
+
 }
