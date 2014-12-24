@@ -12,7 +12,11 @@
 <script type="text/javascript" src="<c:url value="/resources/js/nicEdit.js" />">
 	
 </script>
-
+<style type="text/css">
+table {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../topoAdmin.jsp"></jsp:include>
@@ -39,22 +43,23 @@
 					<div class="col-md-offset-2 col-md-4">
 						<div class="page-header">
 							<div class="btn-group btn-group-justified">
-								<a class="btn btn-default" href="formPublicarTrabalho"><span class="glyphicon glyphicon-plus">
-								 </span>Cadastro Trabalho</a> 
-								 <a class="btn btn-default" href="listaTrabalhos"> <span class="glyphicon glyphicon-search">
-								 </span>Lista Trabalho</a>
+								<a class="btn btn-default" href="formPublicarTrabalho"><span class="glyphicon glyphicon-plus"> </span>Cadastro
+									Trabalho</a> <a class="btn btn-default" href="listaTrabalhos"> <span class="glyphicon glyphicon-search">
+								</span>Lista Trabalho
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 
 
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<table class="table table-bordered table-hover">
-						<tr>
+						<tr class="active">
 							<th>Titulo</th>
 							<th>Disciplina</th>
 							<th>Prazo Entrega</th>
+							<th>Visualizar Trabalho</th>
 						</tr>
 						<tbody>
 
@@ -63,7 +68,24 @@
 									<td>${trabalho.titulo}</td>
 									<td>${trabalho.disciplina.nome}</td>
 									<td>${trabalho.dataLimite}</td>
+									<td><a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${trabalho.id}"><span
+											class="glyphicon glyphicon-file"> </span></a></td>
 								</tr>
+
+								<div class="modal fade" id="modal${trabalho.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<h4 class="modal-title">${trabalho.titulo}</h4>
+											</div>
+											<div class="modal-body">${trabalho.descricao}</div>
+										</div>
+									</div>
+								</div>
 							</c:forEach>
 						</tbody>
 					</table>
