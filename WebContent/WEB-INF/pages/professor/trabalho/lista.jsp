@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,7 +61,7 @@ table {
 								<tr>
 									<td>${trabalho.titulo}</td>
 									<td>${trabalho.disciplina.nome}</td>
-									<td>${trabalho.dataLimite}</td>
+									<td><fmt:formatDate pattern="dd/MM/yyyy"  value="${trabalho.dataLimite}" />	</td>
 									<td><a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal${trabalho.id}"><span
 											class="glyphicon glyphicon-file"> </span></a></td>
 								</tr>

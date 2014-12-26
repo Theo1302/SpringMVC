@@ -1,6 +1,7 @@
 package br.com.ShoolDrive.entidade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,9 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "trabalho")
@@ -35,14 +38,10 @@ public class Trabalho implements Serializable {
     @Column
     private String titulo;
 
-    /*
-     * @Column(name = "data_limite")
-     * private String dataLimite;
-     */
-
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_limite")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private DateTime dataLimite;
+    @DateTimeFormat(pattern = "dd/MM/yyyy", iso = ISO.DATE)
+    private Date dataLimite;
 
 
     @Column(columnDefinition = "TEXT")
@@ -79,11 +78,11 @@ public class Trabalho implements Serializable {
         this.titulo = titulo;
     }
 
-    public DateTime getDataLimite() {
+    public Date getDataLimite() {
         return this.dataLimite;
     }
 
-    public void setDataLimite(DateTime dataLimite) {
+    public void setDataLimite(Date dataLimite) {
         this.dataLimite = dataLimite;
     }
 
