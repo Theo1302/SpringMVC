@@ -15,83 +15,93 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "trabalho")
 @SequenceGenerator(name = "trabalho_seq", sequenceName = "trabalho_seq", allocationSize = 1, initialValue = 1)
 public class Trabalho implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  public Trabalho() {}
+    public Trabalho() {}
 
-  @Id
-  @Column(name = "id", nullable = false)
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "trabalho_seq")
-  private long id;
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "trabalho_seq")
+    private long id;
 
-  @Column
-  private String titulo;
+    @Column
+    private String titulo;
 
-  @Column(name = "data_limite")
-  private String dataLimite;
+    /*
+     * @Column(name = "data_limite")
+     * private String dataLimite;
+     */
 
-  @Column
-  private String descricao;
+    @Column(name = "data_limite")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private DateTime dataLimite;
 
-  @ManyToOne
-  @JoinColumn(name = "disciplina_Id")
-  private Disciplina disciplina;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "trabalho")
-  private List<Entrega> entregas;
+    @Column(columnDefinition = "TEXT")
+    private String descricao;
 
-  public List<Entrega> getEntregas() {
-    return this.entregas;
-  }
+    @ManyToOne
+    @JoinColumn(name = "disciplina_Id")
+    private Disciplina disciplina;
 
-  public void setEntregas(List<Entrega> entregas) {
-    this.entregas = entregas;
-  }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "trabalho")
+    private List<Entrega> entregas;
 
-  public long getId() {
-    return this.id;
-  }
+    public List<Entrega> getEntregas() {
+        return this.entregas;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public void setEntregas(List<Entrega> entregas) {
+        this.entregas = entregas;
+    }
 
-  public String getTitulo() {
-    return this.titulo;
-  }
+    public long getId() {
+        return this.id;
+    }
 
-  public void setTitulo(String titulo) {
-    this.titulo = titulo;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public String getDataLimite() {
-    return this.dataLimite;
-  }
+    public String getTitulo() {
+        return this.titulo;
+    }
 
-  public void setDataLimite(String dataLimite) {
-    this.dataLimite = dataLimite;
-  }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-  public String getDescricao() {
-    return this.descricao;
-  }
+    public DateTime getDataLimite() {
+        return this.dataLimite;
+    }
 
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
+    public void setDataLimite(DateTime dataLimite) {
+        this.dataLimite = dataLimite;
+    }
 
-  public Disciplina getDisciplina() {
-    return this.disciplina;
-  }
+    public String getDescricao() {
+        return this.descricao;
+    }
 
-  public void setDisciplina(Disciplina disciplina) {
-    this.disciplina = disciplina;
-  }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Disciplina getDisciplina() {
+        return this.disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
 
 
 

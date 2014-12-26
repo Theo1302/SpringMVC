@@ -1,7 +1,5 @@
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SchoolDrive</title>
-<script type="text/javascript" src="<c:url value="/resources/js/nicEdit.js" />">
-	
-</script>
 <style type="text/css">
 table {
 	text-align: center;
@@ -43,15 +38,14 @@ table {
 					<div class="col-md-offset-2 col-md-4">
 						<div class="page-header">
 							<div class="btn-group btn-group-justified">
-								<a class="btn btn-default" href="formPublicarTrabalho"><span class="glyphicon glyphicon-plus"> </span>Cadastro
-									Trabalho</a> <a class="btn btn-default" href="listaTrabalhos"> <span class="glyphicon glyphicon-search">
-								</span>Lista Trabalho
-								</a>
+								<a class="btn btn-default" href="formPublicarTrabalho">
+									<span class="glyphicon glyphicon-plus"> </span> Cadastro	Trabalho</a> 
+									<a class="btn btn-default" href="listaTrabalhos"> 
+									<span class="glyphicon glyphicon-search"> </span> Lista Trabalho</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
 
 				<div class="col-md-6">
 					<table class="table table-bordered table-hover">
@@ -62,7 +56,6 @@ table {
 							<th>Visualizar Trabalho</th>
 						</tr>
 						<tbody>
-
 							<c:forEach var="trabalho" items="${trabalhos}">
 								<tr>
 									<td>${trabalho.titulo}</td>
@@ -93,7 +86,5 @@ table {
 			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>
