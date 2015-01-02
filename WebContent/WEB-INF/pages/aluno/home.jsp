@@ -10,7 +10,7 @@
 <title>SchoolDrive</title>
 </head>
 <body>
-	<jsp:include page="topoAdmin.jsp"></jsp:include>
+	<jsp:include page="topoAluno.jsp"></jsp:include>
 	<!-- Corpo da pagina -->
 	<div class="container-fluid">
 		<div class="row-fluid">
