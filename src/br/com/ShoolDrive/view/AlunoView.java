@@ -41,7 +41,7 @@ public class AlunoView {
 		ModelAndView model = new ModelAndView();
 		try {
 			this.alunoController.registrarDisciplina(cursoId, SecurityContextHolder.getContext().getAuthentication()
-																										  .getName());
+			                                         .getName());
 
 			model = this.listaDisciplinas();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
@@ -57,5 +57,12 @@ public class AlunoView {
 		return model;
 	}
 
+	@RequestMapping("/formListaTrabalho")
+	public ModelAndView formTrabalhoAberto() {
+		ModelAndView model = new ModelAndView("aluno/listaTrabalho");
+		String emailAluno = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addObject("disciplinas", this.alunoController.findByEmail(emailAluno).getDisciplinas());
+		return model;
+	}
 
 }
