@@ -65,6 +65,11 @@ public class AlunoControler implements IAlunoController {
 		}
 		else {
 			disciplinas = aluno.getDisciplinas();
+			for (Disciplina disciplinaRegistrada : disciplinas) {
+				if (disciplinaRegistrada.getId() == disciplina.getId()) {
+					throw new RNException("Ocorreu um Erro ao Registrar Disciplina !");
+				}
+			}
 			disciplinas.add(disciplina);
 			aluno.setDisciplinas(disciplinas);
 		}

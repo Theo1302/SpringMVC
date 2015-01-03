@@ -38,14 +38,16 @@ public class AlunoView {
 
 	@RequestMapping("/registraDisciplina")
 	public ModelAndView registrarDisciplina(@RequestParam("disciplinaId") Long cursoId) {
-		ModelAndView model = new ModelAndView("redirect:formListaDiscplinasAluno");
+		ModelAndView model = new ModelAndView();
 		try {
 			this.alunoController.registrarDisciplina(cursoId, SecurityContextHolder.getContext().getAuthentication()
-			                                         .getName());
+																										  .getName());
 
+			model = this.listaDisciplinas();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, "Aluno Registrado!!");
 		} catch (RNException e) {
+			model = this.listaDisciplinas();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.ERRO.getValor());
 			model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, e.getMensagem());
 			e.printStackTrace();
