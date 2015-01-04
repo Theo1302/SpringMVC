@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.ShoolDrive.controler.IAlunoController;
 import br.com.ShoolDrive.controler.IDisciplinaController;
+import br.com.ShoolDrive.controler.ITrabalhoController;
 import br.com.ShoolDrive.exception.RNException;
 import br.com.ShoolDrive.util.AliasPaginas;
 import br.com.ShoolDrive.util.Mensagems;
@@ -22,6 +23,9 @@ public class AlunoView {
 
 	@Autowired
 	private IAlunoController alunoController;
+
+	@Autowired
+	private ITrabalhoController trabalhoController;
 
 	@RequestMapping("/formListaDiscplinasAluno")
 	public ModelAndView listaDisciplinas() {
@@ -41,7 +45,7 @@ public class AlunoView {
 		ModelAndView model = new ModelAndView();
 		try {
 			this.alunoController.registrarDisciplina(cursoId, SecurityContextHolder.getContext().getAuthentication()
-			                                         .getName());
+																										  .getName());
 
 			model = this.listaDisciplinas();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
@@ -64,5 +68,16 @@ public class AlunoView {
 		model.addObject("disciplinas", this.alunoController.findByEmail(emailAluno).getDisciplinas());
 		return model;
 	}
+
+
+	@RequestMapping("/formTrabalho")
+	public ModelAndView formEnviarTrabalho(@RequestParam("trabalhoId") Long trabalhoId) {
+		ModelAndView model = new ModelAndView("aluno/enviarTrabalho");
+		model.addObject("trabalho", this.trabalhoController.findOne(trabalhoId));
+		model.addObject("status", "Aberto");
+		return model;
+	}
+
+
 
 }

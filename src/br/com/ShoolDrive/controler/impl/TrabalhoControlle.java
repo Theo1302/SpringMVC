@@ -14,27 +14,32 @@ import br.com.ShoolDrive.exception.RNException;
 @Service
 public class TrabalhoControlle implements ITrabalhoController {
 
-    @Autowired
-    private ITrabalho trabalhoDao;
+	@Autowired
+	private ITrabalho trabalhoDao;
 
-    @Override
-    public void save(Trabalho trabalho) throws RNException {
-        this.trabalhoDao.save(trabalho);
-    }
+	@Override
+	public void save(Trabalho trabalho) throws RNException {
+		this.trabalhoDao.save(trabalho);
+	}
 
-    @Override
-    public void delete(Trabalho trabalho) throws RNException {
-        this.trabalhoDao.delete(trabalho);
-    }
+	@Override
+	public void delete(Trabalho trabalho) throws RNException {
+		this.trabalhoDao.delete(trabalho);
+	}
 
-    @Override
-    public Iterable<Trabalho> findAll() throws RNException {
-        return this.trabalhoDao.findAll();
-    }
+	@Override
+	public Iterable<Trabalho> findAll() throws RNException {
+		return this.trabalhoDao.findAll();
+	}
 
-    @Override
-    public List<Trabalho> findByDisciplina(Disciplina disciplina) throws RNException {
-        return this.trabalhoDao.findByDisciplina(disciplina);
-    }
+	@Override
+	public List<Trabalho> findByDisciplina(Disciplina disciplina) throws RNException {
+		return this.trabalhoDao.findByDisciplina(disciplina);
+	}
+
+	@Override
+	public Trabalho findOne(Long id) {
+		return this.trabalhoDao.findOne(id);
+	}
 
 }
