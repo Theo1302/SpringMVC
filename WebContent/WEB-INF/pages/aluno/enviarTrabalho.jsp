@@ -9,42 +9,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SchoolDrive</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#trabalhoId").hide();
+});
+</script>
 </head>
 <body>
 	<jsp:include page="topoAluno.jsp"></jsp:include>
-
 	<!-- Corpo da pagina -->
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<jsp:include page="MenuLateral.jsp"></jsp:include>
 			<div class="col-md-8">
-
 				<!-- mensagens -->
 				<jsp:include page="../mensagens.jsp">
 					<jsp:param value="${tipo}" name="tipo" />
 					<jsp:param value="${mensagens}" name="mensagens" />
 				</jsp:include>
-
 				<div class="row">
 					<div align="center" class="page-header">
-						<h3><c:out value="${trabalho.titulo}"></c:out></h3>
+						<h3>
+							<c:out value="${trabalho.titulo}"></c:out>
+						</h3>
 					</div>
 					<!-- Descrição trabalho -->
 					<div class="col-md-6">
-						<div class="thumbnail">
-							${trabalho.descricao}
-						</div>
-
+						<div class="thumbnail">${trabalho.descricao}</div>
 					</div>
 					<div class="col-md-4 col-md-offset-2">
 						<table class="table table-condensed table-hover table-bordered">
 							<caption>
-								<h4>Status de Trabalho</h4>
+								Status de Trabalho
 							</caption>
 							<tbody>
 								<tr>
 									<td>Status</td>
-									<td>${status}</td>
+									<c:choose>
+										<c:when test="${status == true}">
+											<td><strong>Aberto</strong></td>
+										</c:when>
+										<c:otherwise>
+											<td class="danger"><strong>Fechado</strong></td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 								<tr>
 									<td>Prazo Entrega</td>
@@ -52,21 +60,29 @@
 								</tr>
 								<tr>
 									<td>Data Envio do arquivo</td>
-									<td>??</td>
+									<td><fmt:formatDate pattern="dd/MM/yyyy" value="${entrega.dataEntrega}" />
+									</td>
 								</tr>
 								<tr>
 									<td>Nota Trabalho</td>
-									<td>??</td>
+									<td>${entrega.nota}</td>
 								</tr>
-								<tr class="info" align="center">
-									<td colspan="2">
-										<form method="POST" action="uploadFile" enctype="multipart/form-data">
-											Arquivo de upload: <input id="input-1" type="file" class="file" name="file"><br />
-											<button type="submit" class="btn btn-default">
-												<span class="glyphicon glyphicon-cloud-upload"></span> Upload
-											</button>
-										</form>
-								</tr>
+								<c:choose>
+									<c:when test="${status == true}">
+										<tr class="info" align="center">
+											<td colspan="2">
+												<form method="POST" action="uploadFile" enctype="multipart/form-data">
+													Arquivo de upload: 
+													<input id="file" type="file" class="file" name="file">
+													<br />
+													<input type="text" id="trabalhoId" name="Trabalhoid" value="${trabalho.id}">
+													<button type="submit" class="btn btn-default">
+														<span class="glyphicon glyphicon-cloud-upload"></span> Upload
+													</button>
+												</form>
+										</tr>
+									</c:when>
+								</c:choose>
 							</tbody>
 						</table>
 					</div>

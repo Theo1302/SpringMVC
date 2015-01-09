@@ -29,20 +29,15 @@
 					<div align="center" class="page-header">
 						<h2>Trabalho Disponivel</h2>
 					</div>
-
 					<div class="col-md-7 col-md-offset-2">
 						<div role="tabpanel">
-
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs" role="tablist">
 								<c:forEach items="${disciplinas}"  var="disciplina">
-
 									<li role="presentation"><a href="#<c:out value="${disciplina.nome}"></c:out>" aria-controls="${disciplina.nome}"
 										role="tab" data-toggle="tab">${fn:toUpperCase(disciplina.nome)}</a></li>
-
 								</c:forEach>
 							</ul>
-
 							<!-- Tab panes -->
 							<div class="tab-content">
 							<br/>
@@ -68,7 +63,6 @@
 										</table>
 									</div>
 								</c:forEach>
-
 							</div>
 						</div>
 					</div>

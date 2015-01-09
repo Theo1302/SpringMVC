@@ -10,12 +10,21 @@
 
 	<context:component-scan base-package="br.com.ShoolDrive" />
 
+	<!-- Configuração de Arquivo -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="100000000" />
+	</bean>
+
+
+
 
 	<!-- Import de todas as configuraçoes sepadara por camada -->
 
 	<!--JDBC/ORM -->
 	<import resource="spring-data.xml" />
-	
+
 	<!--MVC -->
 	<import resource="spring-mvc.xml" />
 
