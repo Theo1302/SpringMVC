@@ -43,7 +43,7 @@ public class EntregaController implements IEntregaController {
 
 	@Override
 	public List<Entrega> findByTrabalho(Trabalho trabalho) {
-		return null;
+		return this.entregaDao.findByTrabalho(trabalho);
 	}
 
 	@Override
@@ -51,5 +51,10 @@ public class EntregaController implements IEntregaController {
 		Aluno aluno = this.alunoDao.findByEmail(emailAluno);
 		Trabalho trabalho = this.trabalhoDao.findOne(trabalhoId);
 		return this.entregaDao.findByAlunoAndTrabalho(aluno, trabalho);
+	}
+
+	@Override
+	public Entrega findOne(Long entregaId) {
+		return this.entregaDao.findOne(entregaId);
 	}
 }

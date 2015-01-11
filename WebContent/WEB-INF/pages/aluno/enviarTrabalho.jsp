@@ -90,10 +90,6 @@ $(document).ready(function() {
 						</table>
 					</div>
 				</div>
-
-
-				<!-- Informaçoes  -->
-				<div class="row"></div>
 			</div>
 		</div>
 	</div>

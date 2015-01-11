@@ -20,7 +20,7 @@ public interface IEntregaController {
 	 */
 	List<Entrega> findByTrabalho(Trabalho trabalho);
 
-
+	public Entrega findOne(Long entregaId);
 
 	/**
 	 * 
