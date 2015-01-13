@@ -34,23 +34,33 @@
 
 				<div class="row">
 					<div class="col-md-7">
-						<table class="table table-hover table-bordered" style="vertical-align: middle;text-align: center;">
-						<caption><h4>Entregas</h4></caption>
+						<table class="table table-hover table-bordered" style="vertical-align: middle; text-align: center;">
+							<caption>
+								<h4>Entregas</h4>
+							</caption>
 							<thead>
 								<tr class="success">
 									<th style="text-align: center;">Nome Aluno</th>
 									<th style="text-align: center;">Data Entrega</th>
+									<th style="text-align: center;">Nota</th>
 									<th style="text-align: center;">Anexo</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="entrega" items="${entregas}">
+								<form action="notas" method="get">
+									<c:forEach var="entrega" items="${entregas}">
+										<tr>
+											<td>${entrega.aluno.nome}</td>
+											<td><fmt:formatDate pattern="dd/MM/yyyy" value="${entrega.dataEntrega}" /></td>
+											<td style="width: 13%"><input type="text" name="${entrega.aluno.id}" class="form-control"></td>
+											<td><a href="downloadEntrega?entregaId=${entrega.id}" class="btn btn-primary"><span
+													class="glyphicon glyphicon-cloud-download"> </span> </a></td>
+										</tr>
+									</c:forEach>
 									<tr>
-										<td>${entrega.aluno.nome}</td>
-										<td><fmt:formatDate pattern="dd/MM/yyyy" value="${entrega.dataEntrega}" /></td>
-										<td><a href="downloadEntrega?entregaId=${entrega.id}" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"> </span> </a></td>
+										<td colspan="4"><input type="submit" class="btn btn-primary" value="Enviar notas"></td>
 									</tr>
-								</c:forEach>
+								</form>
 							</tbody>
 						</table>
 					</div>

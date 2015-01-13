@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -85,7 +86,7 @@ public class TrabalhoView {
 
 	@RequestMapping(value = "/incluirTrabalho", method = RequestMethod.POST)
 	public ModelAndView incluirTrabalho(@ModelAttribute("trabalho") Trabalho trabalho,
-	                                    @RequestParam("disciplina") Long disciplinaID) {
+													@RequestParam("disciplina") Long disciplinaID) {
 		ModelAndView model = new ModelAndView("redirect:formPublicarTrabalho");
 		try {
 			trabalho.setDisciplina(this.disciplinaController.findOne(disciplinaID));
@@ -133,7 +134,7 @@ public class TrabalhoView {
 
 	@RequestMapping("/downloadEntrega")
 	public void downloadArquivo(@RequestParam("entregaId") Long entregaId, HttpServletRequest request,
-	                            HttpServletResponse response) {
+										 HttpServletResponse response) {
 		Entrega entrega = this.entregaController.findOne(entregaId);
 		String nomeArquivo = entrega.getNomeAnexo();
 		try {
@@ -142,5 +143,20 @@ public class TrabalhoView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@RequestMapping(value = "/notas")
+	public ModelAndView publicarNotas(@RequestParam MultiValueMap<String, String> param) {
+		ModelAndView model1 = new ModelAndView("redirect:home");
+		System.out.println(param.size());
+
+		for (String key : param.keySet()) {
+			System.out.println("Nota :" + param.get(key));
+			System.out.println("Aluno :" + key);
+		}
+
+
+
+		return model1;
 	}
 }

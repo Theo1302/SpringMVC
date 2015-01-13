@@ -118,5 +118,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/joda-time-2.6-javadoc.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/joda-time-2.6-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/joda-time-2.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-core-2.4.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
