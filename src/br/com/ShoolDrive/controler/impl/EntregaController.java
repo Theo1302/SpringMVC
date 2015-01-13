@@ -1,6 +1,7 @@
 package br.com.ShoolDrive.controler.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,25 @@ public class EntregaController implements IEntregaController {
 	@Override
 	public Entrega findOne(Long entregaId) {
 		return this.entregaDao.findOne(entregaId);
+	}
+
+	@Override
+	public void publicarNotas(Map<String, String> notas, Trabalho trabalho) {
+		List<Entrega> entregas = this.entregaDao.findByTrabalho(trabalho);
+
+		for (String alunoId : notas.keySet()) {
+			for (Entrega entrega : entregas) {
+				System.out.print(" Entrega " + entrega.getId());
+				System.out.print(" Aluno " + entrega.getAluno().getNome());
+				System.out.println(" Nota " + entrega.getNota());
+				if (entrega.getAluno().getId() == Long.parseLong(alunoId)) {
+					entrega.setNota(notas.get(alunoId));
+				}
+			}
+		}
+		// atualiza todas as entregas
+		this.entregaDao.save(entregas);
+
+
 	}
 }

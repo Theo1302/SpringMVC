@@ -48,6 +48,7 @@
 							</thead>
 							<tbody>
 								<form action="notas" method="get">
+									
 									<c:forEach var="entrega" items="${entregas}">
 										<tr>
 											<td>${entrega.aluno.nome}</td>
@@ -58,7 +59,10 @@
 										</tr>
 									</c:forEach>
 									<tr>
-										<td colspan="4"><input type="submit" class="btn btn-primary" value="Enviar notas"></td>
+										<td colspan="4">
+										<input style="display: none;" type="text" name="trabalhoId" value="${trabalho.id}">
+										<input type="submit" class="btn btn-primary" value="Enviar notas">
+										</td>
 									</tr>
 								</form>
 							</tbody>

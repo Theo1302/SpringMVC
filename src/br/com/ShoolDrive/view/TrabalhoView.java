@@ -147,16 +147,13 @@ public class TrabalhoView {
 
 	@RequestMapping(value = "/notas")
 	public ModelAndView publicarNotas(@RequestParam MultiValueMap<String, String> param) {
-		ModelAndView model1 = new ModelAndView("redirect:home");
-		System.out.println(param.size());
-
-		for (String key : param.keySet()) {
-			System.out.println("Nota :" + param.get(key));
-			System.out.println("Aluno :" + key);
-		}
-
-
-
-		return model1;
+		ModelAndView model = this.listaTrabalhoDisciplina();
+		Long trabalhoId = Long.parseLong(param.getFirst("trabalhoId"));
+		param.remove("trabalhoId");
+		Trabalho trabalho = this.trabalhoController.findOne(trabalhoId);
+		model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
+		model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, "Notas Publicadas");
+		this.entregaController.publicarNotas(param.toSingleValueMap(), trabalho);
+		return model;
 	}
 }
