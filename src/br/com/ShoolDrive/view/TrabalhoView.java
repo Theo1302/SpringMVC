@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
@@ -86,7 +87,7 @@ public class TrabalhoView {
 
 	@RequestMapping(value = "/incluirTrabalho", method = RequestMethod.POST)
 	public ModelAndView incluirTrabalho(@ModelAttribute("trabalho") Trabalho trabalho,
-													@RequestParam("disciplina") Long disciplinaID) {
+	                                    @RequestParam("disciplina") Long disciplinaID) {
 		ModelAndView model = new ModelAndView("redirect:formPublicarTrabalho");
 		try {
 			trabalho.setDisciplina(this.disciplinaController.findOne(disciplinaID));
@@ -127,14 +128,25 @@ public class TrabalhoView {
 		ModelAndView model = new ModelAndView(AliasPaginas.VIEW_LISTA_ENTREGAS);
 		Trabalho trabalho = this.trabalhoController.findOne(trabalhoId);
 		List<Entrega> entregas = this.entregaController.findByTrabalho(trabalho);
+		DateTime dataTrabalho = new DateTime(trabalho.getDataLimite());
+		if (entregas.size() == 0) {
+			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.ALERTA.getValor());
+			model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, "Ainda não houve entregas!");
+			model.addObject("isEntrega", false);
+		}
+		else {
+			model.addObject("isEntrega", true);
+			model.addObject("entregas", entregas);
+			model.addObject("foraPrazo", dataTrabalho.isBeforeNow());// se estiver fora do prazo
+			// desabilita atualizaçoes
+		}
 		model.addObject("trabalho", trabalho);
-		model.addObject("entregas", entregas);
 		return model;
 	}
 
 	@RequestMapping("/downloadEntrega")
 	public void downloadArquivo(@RequestParam("entregaId") Long entregaId, HttpServletRequest request,
-										 HttpServletResponse response) {
+	                            HttpServletResponse response) {
 		Entrega entrega = this.entregaController.findOne(entregaId);
 		String nomeArquivo = entrega.getNomeAnexo();
 		try {
@@ -151,9 +163,14 @@ public class TrabalhoView {
 		Long trabalhoId = Long.parseLong(param.getFirst("trabalhoId"));
 		param.remove("trabalhoId");
 		Trabalho trabalho = this.trabalhoController.findOne(trabalhoId);
-		model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
-		model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, "Notas Publicadas");
-		this.entregaController.publicarNotas(param.toSingleValueMap(), trabalho);
+		try {
+			this.entregaController.publicarNotas(param.toSingleValueMap(), trabalho);
+			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
+			model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, "Notas Atualizadas !!");
+		} catch (RNException e) {
+			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.ERRO.getValor());
+			model.addObject(Mensagems.VARIAVEL_VIEW_MENSAGEM, e.getMessage());
+		}
 		return model;
 	}
 }

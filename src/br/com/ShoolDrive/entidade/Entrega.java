@@ -29,8 +29,6 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @SequenceGenerator(name = "entrega_seq", sequenceName = "entrega_seq", allocationSize = 1, initialValue = 1)
 public class Entrega implements Serializable {
 
-
-
 	private static final long serialVersionUID = 1L;
 
 	public Entrega() {}

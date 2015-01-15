@@ -5,6 +5,7 @@ import java.util.Map;
 
 import br.com.ShoolDrive.entidade.Entrega;
 import br.com.ShoolDrive.entidade.Trabalho;
+import br.com.ShoolDrive.exception.RNException;
 
 public interface IEntregaController {
 
@@ -42,7 +43,7 @@ public interface IEntregaController {
 	 * <b>Value</b> = Nota <p>
 	 * Metodo Resposavel por publicar as notas dos alunos
 	 */
-	void publicarNotas(Map<String, String> notas, Trabalho trabalho);
+	void publicarNotas(Map<String, String> notas, Trabalho trabalho) throws RNException;
 
 
 }
