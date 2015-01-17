@@ -65,6 +65,7 @@ public class EntregaController implements IEntregaController {
 	public void publicarNotas(Map<String, String> notas, Trabalho trabalho) throws RNException {
 		List<Entrega> entregas = this.entregaDao.findByTrabalho(trabalho);
 		DateTime dataTrabalho = new DateTime(trabalho.getDataLimite());
+
 		for (String alunoId : notas.keySet()) {
 			for (Entrega entrega : entregas) {
 				if (entrega.getAluno().getId() == Long.parseLong(alunoId)) {

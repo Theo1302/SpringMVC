@@ -62,4 +62,5 @@ public interface IAlunoController {
 	public void registrarDisciplina(Long disciplinaId, String emailAluno) throws RNException;
 
 
+
 }

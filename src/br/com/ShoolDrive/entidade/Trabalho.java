@@ -51,7 +51,7 @@ public class Trabalho implements Serializable {
 	@JoinColumn(name = "disciplina_Id")
 	private Disciplina disciplina;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trabalho")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "trabalho")
 	private List<Entrega> entregas;
 
 	public List<Entrega> getEntregas() {

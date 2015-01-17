@@ -3,9 +3,10 @@ package br.com.ShoolDrive.dao;
 import org.springframework.data.repository.CrudRepository;
 
 import br.com.ShoolDrive.entidade.Aluno;
+import br.com.ShoolDrive.entidade.Disciplina;
 import br.com.ShoolDrive.entidade.Role;
 
-public interface IAlunoDao extends CrudRepository<Aluno, Long>{
+public interface IAlunoDao extends CrudRepository<Aluno, Long> {
 	/**
 	 * Pesquisa pelo email
 	 * 
@@ -31,12 +32,12 @@ public interface IAlunoDao extends CrudRepository<Aluno, Long>{
 	Aluno findByRole(Role role);
 
 	// Metodos Spring
-		
+
 	@Override
 	public void delete(Long arg0);
-	
+
 	@Override
 	public <S extends Aluno> S save(S arg0);
 
-	
+	Iterable<Disciplina> findByAlunoOrderByDesc(Aluno aluno);
 }

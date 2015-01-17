@@ -33,14 +33,14 @@
 						<div role="tabpanel">
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs" role="tablist">
-								<c:forEach items="${disciplinas}"  var="disciplina">
-									<li role="presentation"><a href="#<c:out value="${disciplina.nome}"></c:out>" aria-controls="${disciplina.nome}"
-										role="tab" data-toggle="tab">${fn:toUpperCase(disciplina.nome)}</a></li>
+								<c:forEach items="${disciplinas}" var="disciplina">
+									<li role="presentation"><a href="#<c:out value="${disciplina.nome}"></c:out>"
+										aria-controls="${disciplina.nome}" role="tab" data-toggle="tab">${fn:toUpperCase(disciplina.nome)}</a></li>
 								</c:forEach>
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content">
-							<br/>
+								<br />
 								<c:forEach items="${disciplinas}" var="disciplina">
 									<div role="tabpanel" class="tab-pane" id="${disciplina.nome}">
 										<table class="table table-hover">
@@ -51,15 +51,17 @@
 													<th>Visualizar Trabalho</th>
 												</tr>
 											</thead>
-											<c:forEach var="trabalho" items="${disciplina.trabalhos}">
-												<tbody>
+											<tbody>
+												<c:forEach var="trabalho" items="${disciplina.trabalhos}">
+
 													<tr>
 														<td>${trabalho.titulo}</td>
 														<td><fmt:formatDate pattern="dd/MM/yyyy" value="${trabalho.dataLimite}" /></td>
 														<td><a href="formTrabalho?trabalhoId=${trabalho.id}" class="btn btn-primary"> Visualizar</a></td>
 													</tr>
-												</tbody>
-											</c:forEach>
+
+												</c:forEach>
+											</tbody>
 										</table>
 									</div>
 								</c:forEach>

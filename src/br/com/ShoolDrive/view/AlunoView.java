@@ -52,12 +52,22 @@ public class AlunoView {
 		return model;
 	}
 
+
+	@RequestMapping("/formHome")
+	public ModelAndView publi() {
+		ModelAndView model = new ModelAndView(AliasPaginas.HOME_ALUNO);
+		String emailAluno = SecurityContextHolder.getContext().getAuthentication().getName();
+		// Fazer uma logica para que venhas os ultimos trabalhos cadastrado
+		model.addObject("disciplinas", this.alunoController.findByEmail(emailAluno).getDisciplinas());
+		return model;
+	}
+
 	@RequestMapping("/registraDisciplina")
 	public ModelAndView registrarDisciplina(@RequestParam("disciplinaId") Long cursoId) {
 		ModelAndView model = new ModelAndView();
 		try {
 			this.alunoController.registrarDisciplina(cursoId, SecurityContextHolder.getContext().getAuthentication()
-																										  .getName());
+			                                         .getName());
 
 			model = this.listaDisciplinas();
 			model.addObject(TipoMensagem.VARIAVEL_VIEW_TIPO.getValor(), TipoMensagem.SUCESSO.getValor());
@@ -107,7 +117,7 @@ public class AlunoView {
 
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public @ResponseBody ModelAndView uploadFileHandler(@RequestParam("file") MultipartFile file,
-																		 @RequestParam("Trabalhoid") Long TrabalhoId) {
+	                                                    @RequestParam("Trabalhoid") Long TrabalhoId) {
 		ModelAndView model = new ModelAndView();
 		model = this.formTrabalhoAberto();
 		Entrega entrega = new Entrega();

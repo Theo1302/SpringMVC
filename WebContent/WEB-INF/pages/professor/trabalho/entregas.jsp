@@ -10,13 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript"	src="<c:url value="/resources/js/jquery.maskedinput.js"/>"></script>
 <title>SchoolDrive</title>
-<c:if test="${foraPrazo}">
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#notas *').find(':input').prop('disabled', true);
-});
-</script>
-</c:if>
 <script type="text/javascript">
 jQuery(function($) {
 	$("#nota").mask("99.9");
@@ -39,7 +32,7 @@ jQuery(function($) {
 				</jsp:include>
 
 				<div class="row">
-					<div class="page-header">
+					<div align="center" class="page-header">
 						<h2>${trabalho.titulo}<small></small>
 						</h2>
 					</div>

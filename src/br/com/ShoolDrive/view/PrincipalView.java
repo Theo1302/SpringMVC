@@ -1,5 +1,6 @@
 package br.com.ShoolDrive.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,10 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.ShoolDrive.controler.IDisciplinaController;
 import br.com.ShoolDrive.util.AliasPaginas;
 
 @Controller
 public class PrincipalView {
+
+	@Autowired
+	private IDisciplinaController disciplinaController;
+
+
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
@@ -25,9 +32,12 @@ public class PrincipalView {
 		for (GrantedAuthority grant : authe.getAuthorities()) {
 			if (grant.getAuthority().equals("ROLE_ADMIN")) {
 				model.setViewName(AliasPaginas.HOME_ADMIN);
-			} else if (grant.getAuthority().equals("ROLE_ALUNO")) {
-				model.setViewName(AliasPaginas.HOME_ALUNO);
-			} else if (grant.getAuthority().equals("ROLE_PROFESSOR")) {
+			}
+			else if (grant.getAuthority().equals("ROLE_ALUNO")) {
+				model.setViewName("redirect:formHome");
+				// model.setViewName(AliasPaginas.HOME_ALUNO);
+			}
+			else if (grant.getAuthority().equals("ROLE_PROFESSOR")) {
 				model.setViewName(AliasPaginas.HOME_PROFESSOR);
 			}
 		}
