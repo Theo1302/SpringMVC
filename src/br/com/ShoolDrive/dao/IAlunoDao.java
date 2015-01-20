@@ -3,7 +3,6 @@ package br.com.ShoolDrive.dao;
 import org.springframework.data.repository.CrudRepository;
 
 import br.com.ShoolDrive.entidade.Aluno;
-import br.com.ShoolDrive.entidade.Disciplina;
 import br.com.ShoolDrive.entidade.Role;
 
 public interface IAlunoDao extends CrudRepository<Aluno, Long> {
@@ -39,5 +38,5 @@ public interface IAlunoDao extends CrudRepository<Aluno, Long> {
 	@Override
 	public <S extends Aluno> S save(S arg0);
 
-	Iterable<Disciplina> findByAlunoOrderByDesc(Aluno aluno);
+	// Iterable<Disciplina> findByAlunoOrderByDesc(Aluno aluno);
 }

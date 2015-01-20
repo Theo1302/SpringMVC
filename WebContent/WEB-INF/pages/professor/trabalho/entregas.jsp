@@ -43,13 +43,11 @@ jQuery(function($) {
 						<form action="notas" method="get">
 						<c:if test="${isEntrega}">
 							<table class="table table-hover table-bordered" style="vertical-align: middle; text-align: center;">
-								<caption>
-									<h4>Entregas</h4>
-								</caption>
+								<caption>Entregas</caption>
 								<thead>
 									<tr class="success">
 										<th style="text-align: center;">Nome Aluno</th>
-										<th style="text-align: center;">Data Entrega</th>
+										<th style="text-align: center;">Data da Entrega</th>
 										<th style="text-align: center;">Nota</th>
 										<th style="text-align: center;">Anexo</th>
 									</tr>

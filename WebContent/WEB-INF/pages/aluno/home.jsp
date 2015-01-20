@@ -37,7 +37,7 @@
 											<thead>
 												<tr>
 													<th>Titulo</th>
-													<th>Data</th>
+													<th>Data Limite</th>
 													<th>Verificar</th>
 												</tr>
 											</thead>
