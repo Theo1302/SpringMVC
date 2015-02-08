@@ -1,5 +1,7 @@
 package br.com.ShoolDrive.view;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -16,6 +18,7 @@ import br.com.ShoolDrive.controler.IAlunoController;
 import br.com.ShoolDrive.controler.IDisciplinaController;
 import br.com.ShoolDrive.controler.IEntregaController;
 import br.com.ShoolDrive.controler.ITrabalhoController;
+import br.com.ShoolDrive.entidade.Disciplina;
 import br.com.ShoolDrive.entidade.Entrega;
 import br.com.ShoolDrive.entidade.Trabalho;
 import br.com.ShoolDrive.exception.RNException;
@@ -57,8 +60,9 @@ public class AlunoView {
 	public ModelAndView publi() {
 		ModelAndView model = new ModelAndView(AliasPaginas.HOME_ALUNO);
 		String emailAluno = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<Disciplina> disciplinas = this.alunoController.findByEmail(emailAluno).getDisciplinas();
 		// Fazer uma logica para que venhas os ultimos trabalhos cadastrado
-		model.addObject("disciplinas", this.alunoController.findByEmail(emailAluno).getDisciplinas());
+		model.addObject("disciplinas", disciplinas);
 		return model;
 	}
 
@@ -88,6 +92,7 @@ public class AlunoView {
 		ModelAndView model = new ModelAndView("aluno/listaTrabalho");
 		String emailAluno = SecurityContextHolder.getContext().getAuthentication().getName();
 		model.addObject("disciplinas", this.alunoController.findByEmail(emailAluno).getDisciplinas());
+
 		return model;
 	}
 

@@ -8,10 +8,6 @@ import org.springframework.stereotype.Controller;
 public class PrincipalProfessorView {
 
 	public PrincipalProfessorView() {
-		
+
 	}
-	
-	
-	
-	
 }
